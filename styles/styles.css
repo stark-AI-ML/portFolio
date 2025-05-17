@@ -17,7 +17,7 @@ body {
     box-sizing: border-box;
     color: white;
     font-family: "Fira Code", monospace;
-    grid-template-columns: 1fr min(80%, 1200px) 1fr;
+    grid-template-columns: 1fr min(90%, 1200px) 1fr;
     /* Limit center column to 80% or 1200px */
     gap: 10px;
 }
