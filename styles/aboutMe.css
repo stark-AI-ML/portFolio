@@ -1,0 +1,19 @@
+.aboutMeContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 19px;
+    justify-items: center;
+}
+
+
+.aboutLeft {
+    display: flex;
+    /* align-items: center; */
+    margin-top: 100px;
+}
+
+#aboutMePng {
+    height: 508;
+    width: 343;
+    align-self: top right;
+}

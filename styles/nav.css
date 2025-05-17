@@ -1,0 +1,208 @@
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+    z-index: 102;
+
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+
+
+.navBar {
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    height: 61px;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.navBar.scrolled {
+    background: rgba(15, 15, 15, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navContent {
+    margin-top: 10px;
+    align-items: center;
+}
+
+#navRight {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+
+    justify-content: space-evenly;
+    grid-gap: 10px;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    margin-top: 10px;
+    align-items: center;
+
+}
+
+#navLeft {
+    display: grid;
+    font-weight: bold;
+}
+
+#navRight a {
+    text-decoration: none;
+}
+
+#navBar a:hover {
+    color: #C778DD;
+}
+
+
+
+
+/* navLinks --- THis is for the nav Links so changes require search NavLinks */
+.navLinks {
+    color: aliceblue;
+    font-style: unset;
+    padding: 0 1rem;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navLinks:hover {
+    color: #C778DD;
+    animation: linkHover 0.4s ease;
+}
+
+.navLinks.active {
+    color: #C778DD;
+    transform: scale(1.1);
+}
+
+@keyframes linkHover {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.navBar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(199, 120, 221, 0.2),
+            transparent);
+    transition: all 1s;
+    pointer-events: none;
+}
+
+.navBar:hover::after {
+    left: 100%;
+}
+
+
+@keyframes navBarEntry {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+@keyframes backgroundShine {
+    from {
+        background-position: 0% center;
+    }
+
+    to {
+        background-position: -200% center;
+    }
+}
+
+
+
+
+
+@media (max-width: 722px) {
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    #navRight {
+        position: fixed;
+        right: -100%;
+        top: 61px;
+        gap: 3px;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        width: 50%;
+        transition: 0.3s;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 10px 0;
+
+    }
+
+    #navRight:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 32px rgba(199, 120, 221, 0.2);
+        border-color: #C778DD;
+    }
+
+    #navRight.active {
+        left: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .navContent {
+        margin: 15px 0;
+        text-align: center;
+
+    }
+}

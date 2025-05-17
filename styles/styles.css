@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #282C33;
+    box-sizing: border-box;
+}
+
+/* cheking for back go 1 more */
+
+.main {
+    margin-top: 30px;
+    display: grid;
+    box-sizing: border-box;
+    color: white;
+    font-family: "Fira Code", monospace;
+    grid-template-columns: 1fr min(80%, 1200px) 1fr;
+    /* Limit center column to 80% or 1200px */
+    gap: 10px;
+}
+
+.box {
+    height: 14px;
+    width: 14px;
+    background-color: #C778DD;
+    display: inline-block;
+}
+
+.line {
+    display: inline-block;
+    width: 50%;
+    border: 0.5px solid white;
+}
+
+.mPaHeFooter {
+    grid-row: 3;
+    grid-column: 1/-1;
+}
+
+.mainPage {
+    margin-top: 50px;
+    display: grid;
+    display: inline-block;
+}
+
+.Home {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 30px;
+    justify-content: center;
+}
+
+.mPaHeLeft {
+    width: 100%;
+    font-size: 32px;
+    font-weight: 600;
+    /* background-color: black; */
+}
+
+.mPaHeLeft::first-letter {
+    font-size: 40px;
+    color: #C778DD;
+}
+
+.mPaHeRight {
+    width: 100%;
+    /* width: 350px;
+    height: 302px;*/
+    /* border: 3px solid red; */
+    display: flex;
+    justify-content: center;
+
+}
+
+.mPaHeLeft,
+.mPaHeRight {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+
+#mePng {
+    width: 349px;
+    height: 300px;
+}
+
+
+.mainPageFooter {
+    grid-row: 2;
+    grid-column: 1/-1;
+    margin-top: 30px;
+    font-size: 23px;
+    font-weight: 700;
+    border: 1px dotted white;
+    padding: 10px;
+
+    /* you can't fix postioning and size like you yk, the size + postion */
+}
+
+
+.newSectionHead::first-letter {
+    display: inline-block;
+}
+
+.newSectionHead::first-letter {
+    font-size: 40px;
+    color: #C778DD;
+}
+
+.mainPage :has(.newSectionHead) {
+    /* border: 2px solid green; */
+    margin-top: 30px;
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    animation: rotateHue 3s linear infinite;
+}
+
+.custom-cursor::before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: #1a1a1a;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rotateHue {
+    from {
+        filter: hue-rotate(0deg);
+    }
+
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+/* Hover effects */
+a,
+button,
+.goTo,
+.navLinks,
+.projectCard {
+    cursor: none !important;
+}
+
+.custom-cursor.hover {
+    width: 40px;
+    height: 40px;
+    animation: rotateHue 1s linear infinite;
+    box-shadow: 0 0 15px #C778DD;
+}
+
+.custom-cursor.hover::before {
+    width: 50%;
+    height: 50%;
+}
+
+/* Add transition for smooth changes */
+.custom-cursor {
+    transition:
+        width 0.3s ease,
+        height 0.3s ease,
+        box-shadow 0.3s ease;
+}

@@ -1,0 +1,238 @@
+.skillsContainer {
+    margin-top: 30px;
+    animation: cardRise 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(360px, 1fr));
+    gap: 23px;
+    justify-items: center;
+}
+
+.languageContainer {
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid gray;
+    /* padding: 20px; */
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(360px, 1fr));
+    /* gap: 30px; */
+
+    animation: cardRise 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.langContainer:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.langContainer:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.langContainer:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.langContainer:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.similarSkillsStyle {
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid gray;
+    /* padding: 20px; */
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(360px, 1fr));
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: center;
+}
+
+.similarSkillsStyle:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(199, 120, 221, 0.1);
+    border-color: #C778DD;
+}
+
+/* style="--content: 'Languages'"  this is passed from html tag now being catched learned along the 
+will reduce the same code for each..😂*/
+.similarSkillsStyle::before {
+    content: var(--content);
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+
+/* .languageContainer::before {
+    content: "Languages";
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+} */
+
+
+
+.databaseContainer {
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid gray;
+    /* padding: 20px; */
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(360px, 1fr));
+    /* gap: 30px; */
+}
+
+
+/* just here for memory ........... so pass variable using style="--content: 'Languages'" */
+/* .databaseContainer::before {
+    content: "Database";
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+} */
+
+/* .frameWorkContainer::before {
+    content: "FrameWorks";
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+} */
+
+/* .othersContainer::before {
+    content: "others";
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+} */
+
+#toolsContainer {
+    /* color: red; */
+}
+
+
+/* .toolsContainer::before {
+    content: "tools";
+    color: #C778DD;
+    border-radius: 10%;
+    position: absolute;
+    background-color: #282C33;
+    top: -12px;
+    left: 10px;
+    padding: 0 5px;
+    font-weight: bold;
+} */
+
+.goTo {
+    display: flex;
+    margin-top: 10px;
+    height: 28px;
+    width: 5rem;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+}
+
+.goTo:hover {
+    background-color: #c859e7;
+}
+
+.langContainer {
+    margin: 19px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: black;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+    transform: scale(1);
+}
+
+.icons:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(199, 120, 221, 0.4));
+}
+
+
+progress {
+    width: 100%;
+    height: 20px;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #eee;
+    /* Background color */
+}
+
+progress::-webkit-progress-value {
+    background-color: #C778DD;
+    /* Progress fill color */
+}
+
+progress::-moz-progress-bar {
+    background-color: #C778DD;
+    /* Firefox progress fill color */
+}
+
+progress::-moz-progress-bar {
+    background: #C778DD;
+}
+
+
+@keyframes cardRise {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes progressGrow {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: var(--progress-width);
+    }
+}
