@@ -1,0 +1,133 @@
+{
+  "personal": {
+    "name": "Rudresh Singh",
+    "title": "Backend Developer & Deep Tech Engineer",
+    "avatar": "https://avatars.githubusercontent.com/u/116168398?v=4",
+    "bannerImage": "",
+    "bio": [
+      "Building high-performance APIs, distributed systems, and data pipelines.",
+      "Specializing in Node.js, PostgreSQL, Redis, Docker, and AWS infrastructure.",
+      "Currently exploring Deep Learning and scalable ML systems."
+    ],
+    "about": [
+      "I believe projects teach more than notebooks ever could. Every idea is an opportunity to learn something new — whether it's a different tech stack, architecture pattern, or way of thinking. I enjoy building things from scratch, experimenting, breaking them, fixing them, and learning along the way.",
+      "My biggest strength isn't a specific framework or language — it's adaptability. I'm comfortable moving across technologies, learning what's needed, and turning new ideas into working products. For me, growth comes from building, shipping, and repeating the process."
+    ],
+    "profileViews": 0,
+    "email": "rudresh.singh@example.com",
+    "socials": {
+      "github": "https://github.com/stark-AI-ML",
+      "linkedin": "https://linkedin.com/in/yourprofile",
+      "twitter": "https://x.com/yourprofile"
+    },
+    "resumePdf": "/resume.pdf"
+  },
+  "tracker": {
+    "enabled": true,
+    "endpoint": "https://your-backend.com/api/track",
+    "heartbeatIntervalSeconds": 30
+  },
+  "github": {
+    "username": "stark-AI-ML",
+    "showContributions": true
+  },
+  "writings": [
+    {
+      "title": "Architecting a High-Throughput Scraper with BullMQ",
+      "date": "May 2026",
+      "link": "https://medium.com/@yourprofile/architecting-scraper",
+      "platform": "Medium"
+    },
+    {
+      "title": "Why I stopped using ORMs for Complex Queries",
+      "date": "March 2026",
+      "link": "https://dev.to/yourprofile/no-orms",
+      "platform": "Dev.to"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Vidhtech USA",
+      "logo": "",
+      "role": "MERN Stack Developer",
+      "type": "Remote",
+      "period": "Sep 2025 - May 2026",
+      "location": "Remote",
+      "description": "Building scalable backend services and API infrastructure.",
+      "url": ""
+    },
+    {
+      "company": "GSSoC 2025",
+      "logo": "",
+      "role": "Mentor",
+      "type": "Open Source",
+      "period": "March 2025 - July 2025",
+      "location": "Remote",
+      "description": "Guided contributors in open-source projects.",
+      "url": ""
+    }
+  ],
+  "projects": [
+    {
+      "id": "bodh-ecosystem",
+      "name": "Bodh Ecosystem",
+      "status": "Live",
+      "link": "https://github.com/stark-AI-ML/BodhAPI",
+      "image": "",
+      "tech": ["Node.js", "Express 5", "PostgreSQL", "Redis", "Docker", "AWS EC2", "Nginx"],
+      "description": "High-throughput Indian News Intelligence Engine — scraper, API, and analytics platform deployed on AWS with Docker.",
+      "highlights": [
+        "Reduced query latency from 300ms to <20ms with Redis TTL caching",
+        "Advanced PostgreSQL indexing: GIN, BRIN, JSONB, Full-Text Search on partitioned tables",
+        "Custom Redis Lua-script rate limiter (Token Bucket: per-minute + daily quotas)",
+        "Docker internal network (shared_private_net) isolating Postgres/Redis from public access",
+        "Nginx reverse proxy for IP-based rate limiting on sensitive routes",
+        "Playwright + BullMQ data ingestion pipeline for autonomous transcript scraping",
+        "dbmate automated schema migrations in Docker Compose lifecycle"
+      ],
+      "links": {
+        "github": "https://github.com/stark-AI-ML/BodhAPI",
+        "live": ""
+      }
+    },
+    {
+      "id": "saraansh",
+      "name": "saraanshV0.1",
+      "status": "Beta",
+      "link": "https://github.com/stark-AI-ML/saraanshV0.1",
+      "image": "",
+      "tech": ["Chrome Extension", "Vite", "CRXJS", "OpenRouter AI", "html2pdf.js"],
+      "description": "AI-powered Chrome Extension for instant web content summarization and PDF export using Deepseek models.",
+      "highlights": [
+        "OpenRouter AI integration with Deepseek-chat-v3 for real-time content processing",
+        "Browser-native PDF generation pipeline via html2pdf.js",
+        "Built with CRXJS Vite Plugin for modern Chrome Extension development"
+      ],
+      "links": {
+        "github": "https://github.com/stark-AI-ML/saraanshV0.1"
+      }
+    },
+    {
+      "id": "niriksana",
+      "name": "Niriksana",
+      "status": "WIP",
+      "link": "https://github.com/stark-AI-ML/niriksana1.0",
+      "image": "",
+      "tech": ["React", "Vite", "Node.js", "Express", "GeoJSON"],
+      "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
+      "highlights": [
+        "garudah-backend: Node.js service for processing massive GDP and demographic datasets",
+        "IndiaGeoVector GeoJSON integration for state-level geographic rendering",
+        "Data pipeline for religion and economic statistics insertion"
+      ],
+      "links": {
+        "github": "https://github.com/stark-AI-ML/niriksana1.0"
+      }
+    }
+  ],
+  "stack": {
+    "languages": ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
+    "frameworks": ["React", "Node.js", "Express", "Next.js"],
+    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright"]
+  }
+}
