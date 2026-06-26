@@ -1,12 +1,14 @@
+import React from 'react'
 import { GitHubCalendar } from 'react-github-calendar'
+import { Tooltip } from 'react-tooltip'
 import ExperienceItem from '../components/ExperienceItem'
 export default function About({ data }) {
   const { personal, experience, github, stack } = data
 
-  const selectLast8Months = contributions => {
+  const selectLast10Months = contributions => {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
-    const shownMonths = 8;
+    const shownMonths = 10;
     return contributions.filter(day => {
       const date = new Date(day.date);
       const monthDiff = currentMonth - date.getMonth() + (12 * (currentYear - date.getFullYear()));
@@ -32,20 +34,27 @@ export default function About({ data }) {
 
       {github && github.showContributions && github.username && (
         <div className="animate-in delay-3" style={{ marginBottom: '2.5rem' }}>
-          <h2 className="section-title" style={{ marginTop: 0 }}>Contributions</h2>
-          <div style={{ padding: '1.5rem', background: 'var(--surface)', borderRadius: '0.75rem', border: '1px solid var(--border)', overflowX: 'auto', scrollbarWidth: 'none', display: 'flex', justifyContent: 'center' }}>
+          <h2 className="section-title" style={{ marginTop: 0, marginBottom: '1rem' }}>Contributions</h2>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden' }}>
             <div style={{ width: 'max-content' }}>
               <GitHubCalendar 
                 username={github.username} 
-                transformData={selectLast8Months}
+                transformData={selectLast10Months}
                 colorScheme="dark"
-              theme={{
-                light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-              }}
-              fontSize={12}
-              blockSize={12}
+                theme={{
+                  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
+                fontSize={12}
+                blockSize={12}
+                renderBlock={(block, activity) => 
+                  React.cloneElement(block, {
+                    'data-tooltip-id': 'react-tooltip',
+                    'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
+                  })
+                }
               />
+              <Tooltip id="react-tooltip" />
             </div>
           </div>
         </div>

@@ -1,6 +1,9 @@
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { GitHubCalendar } from 'react-github-calendar'
-import { VerifiedBadge, EyeIcon, CalendarIcon, MailIcon, ResumeIcon, socialIcons } from '../components/Icons'
+import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css'
+import { VerifiedBadge, EyeIcon, CalendarIcon, MailIcon, ResumeIcon, socialIcons, GithubIcon, ExternalLinkIcon, TechIcons } from '../components/Icons'
 import ExperienceItem from '../components/ExperienceItem'
 
 /* ─── Status Badge ─── */
@@ -35,20 +38,26 @@ function ProjectCard({ project }) {
         </div>
       </div>
       <div className="project-tech">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          {project.tech.slice(0, 5).map((t, i) => (
-            <span key={i} className="tech-tag" title={t}>
-              <span className={`tech-dot ${t.toLowerCase().replace(/[.\s]/g, '')}`} style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--muted)', display: 'inline-block' }} />
-              {t}
-            </span>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          {project.tech.map((t, i) => {
+            const Icon = TechIcons[t]
+            return Icon ? (
+              <span key={i} title={t} className="tech-icon-link">
+                <Icon />
+              </span>
+            ) : null
+          })}
         </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.75rem' }}>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
           {project.links?.github && (
-            <a href={project.links.github} target="_blank" rel="noreferrer" className="project-link">Code →</a>
+            <a href={project.links.github} target="_blank" rel="noreferrer" className="project-link" aria-label="View Code" title="View Code" style={{ display: 'flex', alignItems: 'center' }}>
+              <GithubIcon />
+            </a>
           )}
           {project.links?.live && (
-            <a href={project.links.live} target="_blank" rel="noreferrer" className="project-link">View →</a>
+            <a href={project.links.live} target="_blank" rel="noreferrer" className="project-link" aria-label="View Live Site" title="View Live Site" style={{ display: 'flex', alignItems: 'center' }}>
+              <ExternalLinkIcon />
+            </a>
           )}
         </div>
       </div>
@@ -76,15 +85,19 @@ function FeaturedCard({ project }) {
         </div>
       )}
       <div className="project-tech">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-          {project.tech.map((t, i) => (
-            <span key={i} className="tech-tag" title={t}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--muted)', display: 'inline-block' }} />
-              {t}
-            </span>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          {project.tech.map((t, i) => {
+            const Icon = TechIcons[t]
+            return Icon ? (
+              <span key={i} title={t} className="tech-icon-link">
+                <Icon />
+              </span>
+            ) : null
+          })}
         </div>
-        <span className="project-link" style={{ marginLeft: 'auto' }}>View on GitHub →</span>
+        <div className="project-link" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }} aria-label="View on GitHub" title="View on GitHub">
+          <GithubIcon />
+        </div>
       </div>
     </a>
   )
@@ -93,12 +106,34 @@ function FeaturedCard({ project }) {
 export default function Home({ data }) {
   const { personal, projects, github, writings, experience } = data
 
+  const [currentBanner, setCurrentBanner] = useState(null)
+
+  useEffect(() => {
+    if (personal.bannerImages && personal.bannerImages.length > 0) {
+      const randomIndex = Math.floor(Math.random() * personal.bannerImages.length)
+      setCurrentBanner(personal.bannerImages[randomIndex])
+    } else if (personal.bannerImage) {
+      setCurrentBanner(personal.bannerImage)
+    }
+  }, [personal.bannerImages, personal.bannerImage])
+
+  const selectLast10Months = contributions => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const shownMonths = 10;
+    return contributions.filter(day => {
+      const date = new Date(day.date);
+      const monthDiff = currentMonth - date.getMonth() + (12 * (currentYear - date.getFullYear()));
+      return monthDiff < shownMonths;
+    });
+  };
+
   return (
     <main className="container" style={{ paddingBottom: '0' }}>
       {/* ── Banner ── */}
       <div className="animate-in delay-1">
-        <div className="hero-banner">
-          {personal.bannerImage && <img src={personal.bannerImage} alt="Banner" />}
+        <div className="hero-banner" key={currentBanner}>
+          {currentBanner && <img src={currentBanner} alt="Banner" />}
         </div>
       </div>
 
@@ -176,18 +211,28 @@ export default function Home({ data }) {
       {github && github.showContributions && github.username && (
         <div className="animate-in delay-5" style={{ marginTop: '2.5rem' }}>
           <div className="border-t border-zinc-800 mb-5" style={{ borderTop: '1px solid var(--border)', marginBottom: '1.25rem' }}></div>
-          <h2 className="section-title" style={{ marginTop: 0 }}>Contributions</h2>
-          <div style={{ padding: '1.5rem', background: 'var(--surface)', borderRadius: '0.75rem', border: '1px solid var(--border)', overflowX: 'auto' }}>
-            <GitHubCalendar 
-              username={github.username} 
-              colorScheme="dark"
-              theme={{
-                light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
-              }}
-              fontSize={12}
-              blockSize={12}
-            />
+          <h2 className="section-title" style={{ marginTop: 0, marginBottom: '1rem' }}>Contributions</h2>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden' }}>
+            <div style={{ width: 'max-content' }}>
+              <GitHubCalendar 
+                username={github.username} 
+                transformData={selectLast10Months}
+                colorScheme="dark"
+                theme={{
+                  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
+                fontSize={12}
+                blockSize={12}
+                renderBlock={(block, activity) => 
+                  React.cloneElement(block, {
+                    'data-tooltip-id': 'react-tooltip',
+                    'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
+                  })
+                }
+              />
+              <Tooltip id="react-tooltip" />
+            </div>
           </div>
         </div>
       )}

@@ -3,7 +3,13 @@
     "name": "Rudresh Singh",
     "title": "Backend Developer & Deep Tech Engineer",
     "avatar": "https://avatars.githubusercontent.com/u/116168398?v=4",
-    "bannerImage": "",
+    "bannerImages": [
+      "/space_banner.png",
+      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000",
+      "https://images.unsplash.com/photo-1511818966892-d7d671e67287?auto=format&fit=crop&q=80&w=2000"
+    ],
     "bio": [
       "Building high-performance APIs, distributed systems, and data pipelines.",
       "Specializing in Node.js, PostgreSQL, Redis, Docker, and AWS infrastructure.",
@@ -21,11 +27,6 @@
       "twitter": "https://x.com/yourprofile"
     },
     "resumePdf": "/resume.pdf"
-  },
-  "tracker": {
-    "enabled": true,
-    "endpoint": "https://your-backend.com/api/track",
-    "heartbeatIntervalSeconds": 30
   },
   "github": {
     "username": "stark-AI-ML",
@@ -74,7 +75,7 @@
       "status": "Live",
       "link": "https://github.com/stark-AI-ML/BodhAPI",
       "image": "",
-      "tech": ["Node.js", "Express 5", "PostgreSQL", "Redis", "Docker", "AWS EC2", "Nginx"],
+      "tech": ["Node.js", "Express", "PostgreSQL", "Redis", "Docker", "AWS", "Nginx"],
       "description": "High-throughput Indian News Intelligence Engine — scraper, API, and analytics platform deployed on AWS with Docker.",
       "highlights": [
         "Reduced query latency from 300ms to <20ms with Redis TTL caching",
@@ -96,7 +97,7 @@
       "status": "Beta",
       "link": "https://github.com/stark-AI-ML/saraanshV0.1",
       "image": "",
-      "tech": ["Chrome Extension", "Vite", "CRXJS", "OpenRouter AI", "html2pdf.js"],
+      "tech": ["Google Chrome", "Vite", "React"],
       "description": "AI-powered Chrome Extension for instant web content summarization and PDF export using Deepseek models.",
       "highlights": [
         "OpenRouter AI integration with Deepseek-chat-v3 for real-time content processing",
@@ -113,7 +114,7 @@
       "status": "WIP",
       "link": "https://github.com/stark-AI-ML/niriksana1.0",
       "image": "",
-      "tech": ["React", "Vite", "Node.js", "Express", "GeoJSON"],
+      "tech": ["React", "Vite", "Node.js", "Express"],
       "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
       "highlights": [
         "garudah-backend: Node.js service for processing massive GDP and demographic datasets",

@@ -64,3 +64,29 @@ export const socialIcons = {
   twitter: TwitterIcon,
   email: MailIcon
 }
+
+import {
+  SiNodedotjs,
+  SiExpress,
+  SiPostgresql,
+  SiRedis,
+  SiDocker,
+  SiAmazonwebservices,
+  SiNginx,
+  SiGooglechrome,
+  SiVite,
+  SiReact
+} from 'react-icons/si'
+
+export const TechIcons = {
+  'Node.js': SiNodedotjs,
+  'Express': SiExpress,
+  'PostgreSQL': SiPostgresql,
+  'Redis': SiRedis,
+  'Docker': SiDocker,
+  'AWS': SiAmazonwebservices,
+  'Nginx': SiNginx,
+  'Google Chrome': SiGooglechrome,
+  'Vite': SiVite,
+  'React': SiReact
+}

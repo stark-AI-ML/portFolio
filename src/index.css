@@ -74,6 +74,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
@@ -203,9 +204,24 @@ svg {
   background: linear-gradient(135deg, #3f3f46 0%, #27272a 40%, #18181b 100%);
   border-radius: 0.75rem;
   overflow: hidden;
-  box-shadow:
+  box-shadow: 
     0 10px 25px -5px rgba(0, 0, 0, 0.5),
     0 4px 10px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* Stardust animated overlay */
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, rgba(255,255,255,0.4), rgba(0,0,0,0));
+  background-size: 150px 150px;
+  animation: stardustDrift 60s linear infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* Bottom gradient fade into page background */
@@ -215,15 +231,28 @@ svg {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40%;
-  background: linear-gradient(to top, var(--bg), transparent);
+  height: 60%;
+  background: linear-gradient(to top, var(--bg) 0%, rgba(9, 9, 11, 0.6) 40%, transparent 100%);
   pointer-events: none;
+  z-index: 2;
 }
 
 .hero-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  animation: spacePan 45s ease-in-out infinite alternate;
+}
+
+@keyframes spacePan {
+  0% { transform: scale(1.02) translate(0, 0); filter: brightness(0.9) contrast(1.1); }
+  50% { filter: brightness(1.2) contrast(1.2); }
+  100% { transform: scale(1.15) translate(-2%, 3%); filter: brightness(0.85) contrast(1.1); }
+}
+
+@keyframes stardustDrift {
+  from { background-position: 0 0; }
+  to { background-position: -300px -150px; }
 }
 
 /* Visitor badge floating on banner */
