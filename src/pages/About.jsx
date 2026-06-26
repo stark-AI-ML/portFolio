@@ -1,46 +1,18 @@
 import { GitHubCalendar } from 'react-github-calendar'
-import { useState } from 'react'
-import { ChevronIcon } from '../components/Icons'
-
-/* ─── Experience Item ─── */
-function ExperienceItem({ exp }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className="experience-item" style={{ flexDirection: 'column', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1rem' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', width: '100%' }} onClick={() => setOpen(!open)} role="button" tabIndex={0}>
-        <div className="experience-logo">
-          {exp.logo ? <img src={exp.logo} alt={exp.company} /> : <span style={{ color: 'var(--muted)', fontWeight: 600, fontSize: '1.1rem' }}>{exp.company[0]}</span>}
-        </div>
-        <div className="experience-info">
-          <div className="experience-header">
-            {exp.url ? (
-              <a href={exp.url} target="_blank" rel="noreferrer" className="experience-company" onClick={e => e.stopPropagation()}>{exp.company}</a>
-            ) : (
-              <span className="experience-company">{exp.company}</span>
-            )}
-            <span className="experience-role">{exp.type}</span>
-          </div>
-          <p className="experience-subtitle">{exp.role}</p>
-        </div>
-        <div className="experience-meta">
-          <p className="experience-date">{exp.period}</p>
-          <p className="experience-location">{exp.location}</p>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.25rem' }}>
-            <ChevronIcon expanded={open} />
-          </div>
-        </div>
-      </div>
-      {open && exp.description && (
-        <div style={{ paddingLeft: '3.5rem', paddingTop: '0.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.6 }}>{exp.description}</p>
-        </div>
-      )}
-    </div>
-  )
-}
-
+import ExperienceItem from '../components/ExperienceItem'
 export default function About({ data }) {
   const { personal, experience, github, stack } = data
+
+  const selectLast8Months = contributions => {
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
+    const shownMonths = 8;
+    return contributions.filter(day => {
+      const date = new Date(day.date);
+      const monthDiff = currentMonth - date.getMonth() + (12 * (currentYear - date.getFullYear()));
+      return monthDiff < shownMonths;
+    });
+  };
 
   return (
     <main className="container" style={{ paddingBottom: '0' }}>
@@ -61,17 +33,20 @@ export default function About({ data }) {
       {github && github.showContributions && github.username && (
         <div className="animate-in delay-3" style={{ marginBottom: '2.5rem' }}>
           <h2 className="section-title" style={{ marginTop: 0 }}>Contributions</h2>
-          <div style={{ padding: '1.5rem', background: 'var(--surface)', borderRadius: '0.75rem', border: '1px solid var(--border)', overflowX: 'auto' }}>
-            <GitHubCalendar 
-              username={github.username} 
-              colorScheme="dark"
+          <div style={{ padding: '1.5rem', background: 'var(--surface)', borderRadius: '0.75rem', border: '1px solid var(--border)', overflowX: 'auto', scrollbarWidth: 'none', display: 'flex', justifyContent: 'center' }}>
+            <div style={{ width: 'max-content' }}>
+              <GitHubCalendar 
+                username={github.username} 
+                transformData={selectLast8Months}
+                colorScheme="dark"
               theme={{
                 light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
                 dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
               }}
               fontSize={12}
               blockSize={12}
-            />
+              />
+            </div>
           </div>
         </div>
       )}

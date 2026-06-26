@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { GitHubCalendar } from 'react-github-calendar'
 import { VerifiedBadge, EyeIcon, CalendarIcon, MailIcon, ResumeIcon, socialIcons } from '../components/Icons'
+import ExperienceItem from '../components/ExperienceItem'
 
 /* ─── Status Badge ─── */
 function StatusBadge({ status }) {
@@ -90,7 +91,7 @@ function FeaturedCard({ project }) {
 }
 
 export default function Home({ data }) {
-  const { personal, projects, github, writings } = data
+  const { personal, projects, github, writings, experience } = data
 
   return (
     <main className="container" style={{ paddingBottom: '0' }}>
@@ -158,9 +159,23 @@ export default function Home({ data }) {
         </div>
       </div>
 
+      {/* ── Experience Section ── */}
+      {experience && experience.length > 0 && (
+        <div className="animate-in delay-4" style={{ marginTop: '2.5rem' }}>
+          <div className="border-t border-zinc-800 mb-5" style={{ borderTop: '1px solid var(--border)', marginBottom: '1.25rem' }}></div>
+          <h2 className="section-title" style={{ marginTop: 0, marginBottom: '1.5rem' }}>Experience So Far</h2>
+          <div className="experience-list">
+            {experience.map((exp, i) => (
+              <ExperienceItem key={i} exp={exp} />
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* ── GitHub Contributions ── */}
       {github && github.showContributions && github.username && (
-        <div className="animate-in delay-4" style={{ marginTop: '2.5rem' }}>
+        <div className="animate-in delay-5" style={{ marginTop: '2.5rem' }}>
+          <div className="border-t border-zinc-800 mb-5" style={{ borderTop: '1px solid var(--border)', marginBottom: '1.25rem' }}></div>
           <h2 className="section-title" style={{ marginTop: 0 }}>Contributions</h2>
           <div style={{ padding: '1.5rem', background: 'var(--surface)', borderRadius: '0.75rem', border: '1px solid var(--border)', overflowX: 'auto' }}>
             <GitHubCalendar 
