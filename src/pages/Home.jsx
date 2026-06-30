@@ -68,7 +68,7 @@ function ProjectCard({ project }) {
 /* ─── Featured Project Card ─── */
 function FeaturedCard({ project }) {
   return (
-    <a href={project.link} target="_blank" rel="noreferrer" className="project-card featured-card">
+    <div className="project-card featured-card">
       <div className="project-header">
         <span className="project-title" style={{ fontSize: '1rem' }}>{project.name}</span>
         <StatusBadge status={project.status} />
@@ -95,11 +95,20 @@ function FeaturedCard({ project }) {
             ) : null
           })}
         </div>
-        <div className="project-link" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }} aria-label="View on GitHub" title="View on GitHub">
-          <GithubIcon />
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          {project.links?.github && (
+            <a href={project.links.github} target="_blank" rel="noreferrer" className="project-link" aria-label="View Code" title="View Code" style={{ display: 'flex', alignItems: 'center' }}>
+              <GithubIcon />
+            </a>
+          )}
+          {project.links?.live && (
+            <a href={project.links.live} target="_blank" rel="noreferrer" className="project-link" aria-label="View Live Site" title="View Live Site" style={{ display: 'flex', alignItems: 'center' }}>
+              <ExternalLinkIcon />
+            </a>
+          )}
         </div>
       </div>
-    </a>
+    </div>
   )
 }
 
@@ -107,6 +116,7 @@ export default function Home({ data }) {
   const { personal, projects, github, writings, experience } = data
 
   const [currentBanner, setCurrentBanner] = useState(null)
+  const [currentTheme, setCurrentTheme] = useState('space')
 
   useEffect(() => {
     if (personal.bannerImages && personal.bannerImages.length > 0) {
@@ -115,6 +125,9 @@ export default function Home({ data }) {
     } else if (personal.bannerImage) {
       setCurrentBanner(personal.bannerImage)
     }
+
+    const themes = ['space', 'ironman']
+    setCurrentTheme(themes[Math.floor(Math.random() * themes.length)])
   }, [personal.bannerImages, personal.bannerImage])
 
   const selectLast10Months = contributions => {
@@ -132,8 +145,27 @@ export default function Home({ data }) {
     <main className="container" style={{ paddingBottom: '0' }}>
       {/* ── Banner ── */}
       <div className="animate-in delay-1">
-        <div className="hero-banner" key={currentBanner}>
+        <div className={`hero-banner theme-${currentTheme}`} key={currentBanner + currentTheme}>
           {currentBanner && <img src={currentBanner} alt="Banner" />}
+          
+          {currentTheme === 'space' && (
+            <>
+              <div className="shooting-star star-1"></div>
+              <div className="shooting-star star-2"></div>
+              <div className="shooting-star star-3"></div>
+              <div className="shooting-star star-4"></div>
+            </>
+          )}
+
+          {currentTheme === 'ironman' && (
+            <>
+              <div className="arc-reactor">
+                <div className="core"></div>
+              </div>
+              <div className="hud-line hud-line-1"></div>
+              <div className="hud-line hud-line-2"></div>
+            </>
+          )}
         </div>
       </div>
 
@@ -170,7 +202,7 @@ export default function Home({ data }) {
           <a href="#projects" className="btn btn-primary">
             <CalendarIcon /> My Work
           </a>
-          <a href={`mailto:${personal.email}`} className="btn btn-outline">
+          <a href={`mailto:${`rslikefoot00@gmail.com`}`} className="btn btn-outline">
             <MailIcon /> Send an email
           </a>
         </div>

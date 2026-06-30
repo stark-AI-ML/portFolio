@@ -71,12 +71,13 @@ import {
   SiPostgresql,
   SiRedis,
   SiDocker,
-  SiAmazonwebservices,
   SiNginx,
   SiGooglechrome,
   SiVite,
   SiReact
 } from 'react-icons/si'
+
+import { FaAws } from 'react-icons/fa'
 
 export const TechIcons = {
   'Node.js': SiNodedotjs,
@@ -84,7 +85,7 @@ export const TechIcons = {
   'PostgreSQL': SiPostgresql,
   'Redis': SiRedis,
   'Docker': SiDocker,
-  'AWS': SiAmazonwebservices,
+  'AWS': FaAws,
   'Nginx': SiNginx,
   'Google Chrome': SiGooglechrome,
   'Vite': SiVite,

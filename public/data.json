@@ -5,10 +5,7 @@
     "avatar": "https://avatars.githubusercontent.com/u/116168398?v=4",
     "bannerImages": [
       "/space_banner.png",
-      "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000",
-      "https://images.unsplash.com/photo-1511818966892-d7d671e67287?auto=format&fit=crop&q=80&w=2000"
+      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000"
     ],
     "bio": [
       "Building high-performance APIs, distributed systems, and data pipelines.",
@@ -19,62 +16,41 @@
       "I believe projects teach more than notebooks ever could. Every idea is an opportunity to learn something new — whether it's a different tech stack, architecture pattern, or way of thinking. I enjoy building things from scratch, experimenting, breaking them, fixing them, and learning along the way.",
       "My biggest strength isn't a specific framework or language — it's adaptability. I'm comfortable moving across technologies, learning what's needed, and turning new ideas into working products. For me, growth comes from building, shipping, and repeating the process."
     ],
-    "profileViews": 0,
-    "email": "rudresh.singh@example.com",
+    "profileViews": 5,
+    "email": "reslikefoot00@gmail.com",
     "socials": {
       "github": "https://github.com/stark-AI-ML",
-      "linkedin": "https://linkedin.com/in/yourprofile",
-      "twitter": "https://x.com/yourprofile"
+      "linkedin": "https://www.linkedin.com/in/rudresh-singh-a28967241/",
+      "twitter": "https://x.com/RudreshSin51850"
     },
-    "resumePdf": "/resume.pdf"
+    "resumePdf": "https://drive.google.com/open?id=15FJ4bRUDtRo033E7PcRg7zihGb2jrIsR&usp=drive_fs"
   },
   "github": {
     "username": "stark-AI-ML",
     "showContributions": true
   },
   "writings": [
-    {
-      "title": "Architecting a High-Throughput Scraper with BullMQ",
-      "date": "May 2026",
-      "link": "https://medium.com/@yourprofile/architecting-scraper",
-      "platform": "Medium"
+      {
+      "title": "Bash Tutorial for starters",
+      "date": "Nov 2024",
+      "link": "https://bash-rudresh.hashnode.dev/bash-starter",
+      "platform": "Hashnode"
     },
     {
-      "title": "Why I stopped using ORMs for Complex Queries",
-      "date": "March 2026",
-      "link": "https://dev.to/yourprofile/no-orms",
-      "platform": "Dev.to"
+      "title": "Bash Tutorial fro Mid to ADV",
+      "date": "Nov 2024",
+      "link": "https://bash-rudresh.hashnode.dev/bashmidadv",
+      "platform": "Hashnode"
     }
   ],
-  "experience": [
-    {
-      "company": "Vidhtech USA",
-      "logo": "",
-      "role": "MERN Stack Developer",
-      "type": "Remote",
-      "period": "Sep 2025 - May 2026",
-      "location": "Remote",
-      "description": "Building scalable backend services and API infrastructure.",
-      "url": ""
-    },
-    {
-      "company": "GSSoC 2025",
-      "logo": "",
-      "role": "Mentor",
-      "type": "Open Source",
-      "period": "March 2025 - July 2025",
-      "location": "Remote",
-      "description": "Guided contributors in open-source projects.",
-      "url": ""
-    }
-  ],
+
   "projects": [
     {
       "id": "bodh-ecosystem",
       "name": "Bodh Ecosystem",
       "status": "Live",
       "link": "https://github.com/stark-AI-ML/BodhAPI",
-      "image": "",
+      "image": "./bodhDocs.png",
       "tech": ["Node.js", "Express", "PostgreSQL", "Redis", "Docker", "AWS", "Nginx"],
       "description": "High-throughput Indian News Intelligence Engine — scraper, API, and analytics platform deployed on AWS with Docker.",
       "highlights": [
@@ -88,7 +64,7 @@
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/BodhAPI",
-        "live": ""
+        "live": "https://docs.bodhapi.online/"
       }
     },
     {
@@ -96,7 +72,7 @@
       "name": "saraanshV0.1",
       "status": "Beta",
       "link": "https://github.com/stark-AI-ML/saraanshV0.1",
-      "image": "",
+      "image": "./saraansh.png",
       "tech": ["Google Chrome", "Vite", "React"],
       "description": "AI-powered Chrome Extension for instant web content summarization and PDF export using Deepseek models.",
       "highlights": [
@@ -105,7 +81,8 @@
         "Built with CRXJS Vite Plugin for modern Chrome Extension development"
       ],
       "links": {
-        "github": "https://github.com/stark-AI-ML/saraanshV0.1"
+        "github": "https://github.com/stark-AI-ML/saraanshV0.1", 
+        "live": "https://saraansh-wine.vercel.app/"
       }
     },
     {
@@ -113,7 +90,7 @@
       "name": "Niriksana",
       "status": "WIP",
       "link": "https://github.com/stark-AI-ML/niriksana1.0",
-      "image": "",
+      "image": "./niriksana_garudah.png",
       "tech": ["React", "Vite", "Node.js", "Express"],
       "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
       "highlights": [
@@ -124,7 +101,26 @@
       "links": {
         "github": "https://github.com/stark-AI-ML/niriksana1.0"
       }
+    }, 
+     {
+      "id": "chatSever",
+      "name": "Server-Client-Chat-server",
+      "status": "Active",
+      "link": "https://github.com/stark-AI-ML/Server-Client-Chat-server-",
+      "image": "./niriksana_garudah.png",
+      "tech": ["React", "Vite", "Node.js", "Express"],
+      "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
+      "highlights": [
+        "creating Chat Server with C++ & Winsock lib"
+      ],
+      "links": {
+        "github": "https://github.com/stark-AI-ML/niriksana1.0"
+      }
     }
+
+
+
+    
   ],
   "stack": {
     "languages": ["JavaScript", "TypeScript", "Python", "Java", "SQL"],

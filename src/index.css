@@ -277,6 +277,141 @@ svg {
 
 
 /* ============================================================
+   THEMES (Space & Iron Man)
+   ============================================================ */
+
+/* Space Theme */
+.hero-banner.theme-space {
+  background: linear-gradient(135deg, #0b0f19 0%, #000000 100%);
+}
+
+.hero-banner.theme-space img {
+  opacity: 0.3; /* dim the image so stars are visible */
+  mix-blend-mode: lighten;
+}
+
+.shooting-star {
+  position: absolute;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px 2px rgba(255,255,255,0.4);
+  transform: rotate(-35deg);
+  z-index: 3;
+  opacity: 0;
+}
+
+.star-1 {
+  top: 40%;
+  left: -20%;
+  animation: shoot 5s infinite ease-in 0s;
+}
+
+.star-2 {
+  top: 70%;
+  left: 10%;
+  animation: shoot 4.5s infinite ease-in 1.5s;
+}
+
+.star-3 {
+  top: 20%;
+  left: 50%;
+  animation: shoot 6s infinite ease-in 3s;
+}
+
+.star-4 {
+  top: 90%;
+  left: -10%;
+  animation: shoot 5.5s infinite ease-in 4.2s;
+}
+
+@keyframes shoot {
+  0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+  10% { opacity: 1; }
+  20% { transform: translateX(1200px) translateY(-840px) rotate(-35deg); opacity: 0; }
+  100% { transform: translateX(1200px) translateY(-840px) rotate(-35deg); opacity: 0; }
+}
+
+/* Iron Man Theme */
+.hero-banner.theme-ironman {
+  background: linear-gradient(135deg, #2b0000 0%, #000000 100%);
+}
+
+.hero-banner.theme-ironman::before {
+  display: none; /* Hide stardust overlay */
+}
+
+.hero-banner.theme-ironman img {
+  opacity: 0.4;
+  mix-blend-mode: screen;
+  filter: sepia(1) hue-rotate(-50deg) saturate(3);
+}
+
+.arc-reactor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #0ff;
+  box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  animation: pulseReactor 2s infinite alternate;
+}
+
+.arc-reactor .core {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 30px #0ff, 0 0 50px #fff;
+}
+
+@keyframes pulseReactor {
+  0% { box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff; opacity: 0.8; }
+  100% { box-shadow: 0 0 40px #0ff, inset 0 0 40px #0ff; opacity: 1; }
+}
+
+.hud-line {
+  position: absolute;
+  height: 2px;
+  background: rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 10px #0ff;
+  z-index: 3;
+}
+
+.hud-line-1 {
+  top: 30%;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: scanline 3s infinite linear;
+}
+
+.hud-line-2 {
+  top: 70%;
+  right: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  animation: scanline 4s infinite linear 1s;
+}
+
+@keyframes scanline {
+  0% { transform: scaleX(0); opacity: 1; }
+  50% { transform: scaleX(1); opacity: 0.5; }
+  100% { transform: scaleX(0); opacity: 0; }
+}
+
+
+/* ============================================================
    PROFILE SECTION (overlaps banner)
    ============================================================ */
 .hero-profile,
@@ -815,6 +950,20 @@ svg {
   border-top: 1px solid rgba(39, 39, 42, 0.5);  /* zinc-800/50 */
   padding-top: 0.75rem;
 }
+
+.tech-icon-link {
+  color: var(--muted);
+  font-size: 1.25rem;
+  transition: color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tech-icon-link:hover {
+  color: var(--fg);
+  transform: scale(1.1);
+}
+
 
 .tech-tag {
   font-size: 11px;

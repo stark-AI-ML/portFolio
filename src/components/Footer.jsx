@@ -10,7 +10,7 @@ export default function Footer({ personal }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <p style={{ fontFamily: 'var(--font-mono)', fontSize: '15px', color: 'var(--fg)', margin: 0 }}>{personal.name}</p>
-              <p style={{ fontSize: '14px', color: 'var(--muted)', margin: 0, maxWidth: '300px' }}>Don't make my kitty run too much</p>
+              <p style={{ fontSize: '14px', color: 'var(--muted)', margin: 0, maxWidth: '300px' }}>Keep moving faword Dr. senku</p>
             </div>
             
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
