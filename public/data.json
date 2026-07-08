@@ -107,7 +107,7 @@
       "name": "Server-Client-Chat-server",
       "status": "Active",
       "link": "https://github.com/stark-AI-ML/Server-Client-Chat-server-",
-      "image": "./niriksana_garudah.png",
+      "image": "./client_server.png",
       "tech": ["React", "Vite", "Node.js", "Express"],
       "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
       "highlights": [
@@ -123,8 +123,8 @@
     
   ],
   "stack": {
-    "languages": ["JavaScript", "TypeScript", "Python", "Java", "SQL"],
-    "frameworks": ["React", "Node.js", "Express", "Next.js"],
-    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright"]
+    "languages": ["JavaScript", "TypeScript", "Python", "SQL"],
+    "frameworks": ["React", "Node.js", "Express"],
+    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright", "BullMQ"]
   }
 }

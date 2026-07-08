@@ -111,15 +111,19 @@ svg {
 
 
 /* ============================================================
-   ANIMATIONS — Staggered Fade-In System
+   ANIMATIONS — Staggered Fade-In System (Enhanced)
    ============================================================ */
 @keyframes fadeInUp {
-  from {
+  0% {
     opacity: 0;
-    filter: blur(8px);
-    transform: translateY(20px) scale(0.985);
+    filter: blur(12px);
+    transform: translateY(30px) scale(0.96);
   }
-  to {
+  60% {
+    filter: blur(2px);
+    transform: translateY(-2px) scale(1.005);
+  }
+  100% {
     opacity: 1;
     filter: blur(0);
     transform: translateY(0) scale(1);
@@ -131,20 +135,43 @@ svg {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.animate-in {
-  opacity: 0;
-  animation: fadeInUp 0.6s var(--ease-out) forwards;
+/* Banner cinematic entrance */
+@keyframes bannerReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(15px) brightness(0.3);
+  }
+  40% {
+    opacity: 0.7;
+    filter: blur(4px) brightness(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0) brightness(1);
+  }
 }
 
-/* Stagger delay classes: 100ms increments */
-.delay-1 { animation-delay: 100ms; }
+.animate-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* The banner gets its own cinematic entrance */
+.animate-in.delay-1 .hero-banner {
+  animation: bannerReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Stagger delay classes: 120ms increments for smoother cascade */
+.delay-1 { animation-delay: 80ms; }
 .delay-2 { animation-delay: 200ms; }
-.delay-3 { animation-delay: 300ms; }
-.delay-4 { animation-delay: 400ms; }
-.delay-5 { animation-delay: 500ms; }
-.delay-6 { animation-delay: 600ms; }
-.delay-7 { animation-delay: 700ms; }
-.delay-8 { animation-delay: 800ms; }
+.delay-3 { animation-delay: 350ms; }
+.delay-4 { animation-delay: 500ms; }
+.delay-5 { animation-delay: 650ms; }
+.delay-6 { animation-delay: 800ms; }
+.delay-7 { animation-delay: 950ms; }
+.delay-8 { animation-delay: 1100ms; }
 
 
 /* ============================================================
@@ -290,124 +317,273 @@ svg {
   mix-blend-mode: lighten;
 }
 
+/* ── Shooting Stars — Glowing Comet Style ── */
 .shooting-star {
   position: absolute;
-  width: 150px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
-  border-radius: 50%;
-  box-shadow: 0 0 10px 2px rgba(255,255,255,0.4);
-  transform: rotate(-35deg);
+  border-radius: 100px;
   z-index: 3;
   opacity: 0;
+  will-change: transform, opacity;
 }
 
-.star-1 {
-  top: 40%;
-  left: -20%;
-  animation: shoot 5s infinite ease-in 0s;
+/* Bright comet head */
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
 }
 
-.star-2 {
-  top: 70%;
+/* Sparkle trail particles */
+.shooting-star::after {
+  content: '';
+  position: absolute;
+  top: 50%;
   left: 10%;
-  animation: shoot 4.5s infinite ease-in 1.5s;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  opacity: 0.6;
 }
 
+/* ── Star variations — sizes, colors, positions ── */
+
+/* Cyan comet — large, fast */
+.star-1 {
+  width: 180px;
+  background: linear-gradient(90deg, transparent 0%, rgba(100, 220, 255, 0.15) 20%, rgba(100, 220, 255, 0.6) 70%, #fff 100%);
+  box-shadow: 0 0 12px 2px rgba(100, 220, 255, 0.5), 0 0 30px 4px rgba(100, 220, 255, 0.15);
+  top: 35%;
+  left: -25%;
+  animation: shootComet1 4.5s infinite ease-in 0.3s;
+}
+.star-1::before {
+  box-shadow: 0 0 8px 4px rgba(100, 220, 255, 0.8), 0 0 20px 6px rgba(100, 220, 255, 0.3);
+}
+.star-1::after {
+  background: rgba(100, 220, 255, 0.8);
+  box-shadow: 30px 2px 0 rgba(100, 220, 255, 0.3), 65px -1px 0 rgba(100, 220, 255, 0.15);
+}
+
+/* Gold comet — medium */
+.star-2 {
+  width: 120px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 200, 80, 0.1) 30%, rgba(255, 200, 80, 0.5) 75%, #fff 100%);
+  box-shadow: 0 0 8px 1px rgba(255, 200, 80, 0.4), 0 0 20px 3px rgba(255, 200, 80, 0.1);
+  top: 65%;
+  left: 5%;
+  animation: shootComet2 5.5s infinite ease-in 2s;
+}
+.star-2::before {
+  width: 5px;
+  height: 5px;
+  box-shadow: 0 0 6px 3px rgba(255, 200, 80, 0.7), 0 0 15px 5px rgba(255, 200, 80, 0.2);
+}
+.star-2::after {
+  background: rgba(255, 200, 80, 0.7);
+  box-shadow: 20px 1px 0 rgba(255, 200, 80, 0.25), 45px -1px 0 rgba(255, 200, 80, 0.1);
+}
+
+/* Violet comet — small, slow */
 .star-3 {
-  top: 20%;
-  left: 50%;
-  animation: shoot 6s infinite ease-in 3s;
+  width: 90px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent 0%, rgba(180, 130, 255, 0.1) 30%, rgba(180, 130, 255, 0.5) 80%, #fff 100%);
+  box-shadow: 0 0 8px 1px rgba(180, 130, 255, 0.4);
+  top: 22%;
+  left: 40%;
+  animation: shootComet3 7s infinite ease-in 3.8s;
+}
+.star-3::before {
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 0 6px 3px rgba(180, 130, 255, 0.7), 0 0 14px 4px rgba(180, 130, 255, 0.2);
+}
+.star-3::after {
+  background: rgba(180, 130, 255, 0.6);
+  box-shadow: 15px 1px 0 rgba(180, 130, 255, 0.2);
 }
 
+/* White comet — tiny, quick */
 .star-4 {
-  top: 90%;
-  left: -10%;
-  animation: shoot 5.5s infinite ease-in 4.2s;
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(255, 255, 255, 0.3) 60%, #fff 100%);
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.3);
+  top: 85%;
+  left: -15%;
+  animation: shootComet1 3.8s infinite ease-in 5s;
+}
+.star-4::before {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.6);
+}
+.star-4::after { display: none; }
+
+/* Cyan comet 2 — medium, different angle */
+.star-5 {
+  width: 140px;
+  background: linear-gradient(90deg, transparent 0%, rgba(100, 220, 255, 0.1) 25%, rgba(100, 220, 255, 0.5) 75%, #fff 100%);
+  box-shadow: 0 0 10px 2px rgba(100, 220, 255, 0.4);
+  top: 50%;
+  left: 20%;
+  animation: shootComet2 6s infinite ease-in 6.5s;
+}
+.star-5::before {
+  width: 5px;
+  height: 5px;
+  box-shadow: 0 0 7px 3px rgba(100, 220, 255, 0.7);
+}
+.star-5::after {
+  background: rgba(100, 220, 255, 0.6);
+  box-shadow: 25px 1px 0 rgba(100, 220, 255, 0.2);
 }
 
-@keyframes shoot {
-  0% { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
-  10% { opacity: 1; }
-  20% { transform: translateX(1200px) translateY(-840px) rotate(-35deg); opacity: 0; }
+/* Gold micro-comet */
+.star-6 {
+  width: 70px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(255, 200, 80, 0.2) 50%, rgba(255, 200, 80, 0.6) 90%, #fff 100%);
+  box-shadow: 0 0 6px 1px rgba(255, 200, 80, 0.3);
+  top: 15%;
+  left: 60%;
+  animation: shootComet3 4s infinite ease-in 1.2s;
+}
+.star-6::before {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 5px 2px rgba(255, 200, 80, 0.6);
+}
+.star-6::after { display: none; }
+
+/* Violet large comet */
+.star-7 {
+  width: 160px;
+  background: linear-gradient(90deg, transparent 0%, rgba(180, 130, 255, 0.1) 20%, rgba(180, 130, 255, 0.5) 70%, #fff 100%);
+  box-shadow: 0 0 10px 2px rgba(180, 130, 255, 0.4), 0 0 25px 4px rgba(180, 130, 255, 0.1);
+  top: 75%;
+  left: 30%;
+  animation: shootComet1 5s infinite ease-in 8s;
+}
+.star-7::before {
+  width: 5px;
+  height: 5px;
+  box-shadow: 0 0 7px 3px rgba(180, 130, 255, 0.8), 0 0 16px 5px rgba(180, 130, 255, 0.2);
+}
+.star-7::after {
+  background: rgba(180, 130, 255, 0.6);
+  box-shadow: 30px 2px 0 rgba(180, 130, 255, 0.2), 60px -1px 0 rgba(180, 130, 255, 0.1);
+}
+
+/* ── Shooting animations — 3 variants for natural randomness ── */
+@keyframes shootComet1 {
+  0%   { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
+  2%   { opacity: 0.4; }
+  5%   { opacity: 1; }
+  18%  { transform: translateX(900px) translateY(-630px) rotate(-35deg); opacity: 0.3; }
+  22%  { transform: translateX(1200px) translateY(-840px) rotate(-35deg); opacity: 0; }
   100% { transform: translateX(1200px) translateY(-840px) rotate(-35deg); opacity: 0; }
 }
 
-/* Iron Man Theme */
-.hero-banner.theme-ironman {
-  background: linear-gradient(135deg, #2b0000 0%, #000000 100%);
+@keyframes shootComet2 {
+  0%   { transform: translateX(0) translateY(0) rotate(-40deg); opacity: 0; }
+  3%   { opacity: 0.5; }
+  6%   { opacity: 1; }
+  15%  { transform: translateX(700px) translateY(-588px) rotate(-40deg); opacity: 0.4; }
+  20%  { transform: translateX(1000px) translateY(-840px) rotate(-40deg); opacity: 0; }
+  100% { transform: translateX(1000px) translateY(-840px) rotate(-40deg); opacity: 0; }
 }
 
-.hero-banner.theme-ironman::before {
-  display: none; /* Hide stardust overlay */
+@keyframes shootComet3 {
+  0%   { transform: translateX(0) translateY(0) rotate(-30deg); opacity: 0; }
+  4%   { opacity: 0.6; }
+  8%   { opacity: 1; }
+  20%  { transform: translateX(600px) translateY(-346px) rotate(-30deg); opacity: 0.2; }
+  25%  { transform: translateX(800px) translateY(-462px) rotate(-30deg); opacity: 0; }
+  100% { transform: translateX(800px) translateY(-462px) rotate(-30deg); opacity: 0; }
 }
 
-.hero-banner.theme-ironman img {
-  opacity: 0.4;
-  mix-blend-mode: screen;
-  filter: sepia(1) hue-rotate(-50deg) saturate(3);
+/* Rain / Forest Theme — Peaceful, slow, timelapse nature vibe */
+.hero-banner.theme-rain {
+  background: linear-gradient(180deg, #0a120a 0%, #0d1f0d 40%, #081008 100%);
 }
 
-.arc-reactor {
+.hero-banner.theme-rain::before {
+  /* Soft mist/fog drifting slowly */
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 4px solid #0ff;
-  box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3;
-  animation: pulseReactor 2s infinite alternate;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 300px 80px at 20% 60%, rgba(255,255,255,0.03), transparent),
+    radial-gradient(ellipse 250px 60px at 70% 40%, rgba(255,255,255,0.025), transparent),
+    radial-gradient(ellipse 400px 100px at 50% 80%, rgba(255,255,255,0.02), transparent);
+  animation: mistDrift 30s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
 }
 
-.arc-reactor .core {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 30px #0ff, 0 0 50px #fff;
+.hero-banner.theme-rain img {
+  opacity: 0.55;
+  mix-blend-mode: luminosity;
+  filter: brightness(0.6) contrast(1.1) saturate(0.7);
+  animation: forestBreathe 20s ease-in-out infinite alternate;
 }
 
-@keyframes pulseReactor {
-  0% { box-shadow: 0 0 20px #0ff, inset 0 0 20px #0ff; opacity: 0.8; }
-  100% { box-shadow: 0 0 40px #0ff, inset 0 0 40px #0ff; opacity: 1; }
+@keyframes forestBreathe {
+  0%   { transform: scale(1.01); filter: brightness(0.55) contrast(1.1) saturate(0.7); }
+  50%  { filter: brightness(0.65) contrast(1.15) saturate(0.8); }
+  100% { transform: scale(1.06) translate(-1%, 1%); filter: brightness(0.5) contrast(1.1) saturate(0.65); }
 }
 
-.hud-line {
+@keyframes mistDrift {
+  0%   { opacity: 0.6; transform: translateX(0); }
+  50%  { opacity: 1; }
+  100% { opacity: 0.7; transform: translateX(-30px); }
+}
+
+/* Rain drops — thin, slow-falling vertical streaks */
+.rain-drop {
   position: absolute;
-  height: 2px;
-  background: rgba(0, 255, 255, 0.5);
-  box-shadow: 0 0 10px #0ff;
+  width: 1px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(180deg, transparent 0%, rgba(180, 210, 220, 0.08) 30%, rgba(180, 210, 220, 0.2) 100%);
   z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
 }
 
-.hud-line-1 {
-  top: 30%;
-  left: 0;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: scanline 3s infinite linear;
-}
+.rain-drop-1  { height: 40px; left: 8%;  top: -10%; animation: rainFall 4.0s infinite linear 0.0s; }
+.rain-drop-2  { height: 35px; left: 15%; top: -8%;  animation: rainFall 3.5s infinite linear 0.6s; }
+.rain-drop-3  { height: 50px; left: 24%; top: -12%; animation: rainFall 4.5s infinite linear 1.2s; }
+.rain-drop-4  { height: 30px; left: 33%; top: -8%;  animation: rainFall 3.8s infinite linear 0.3s; }
+.rain-drop-5  { height: 45px; left: 42%; top: -10%; animation: rainFall 4.2s infinite linear 1.8s; }
+.rain-drop-6  { height: 38px; left: 51%; top: -9%;  animation: rainFall 3.6s infinite linear 0.9s; }
+.rain-drop-7  { height: 42px; left: 60%; top: -11%; animation: rainFall 4.4s infinite linear 2.4s; }
+.rain-drop-8  { height: 33px; left: 68%; top: -8%;  animation: rainFall 3.7s infinite linear 1.5s; }
+.rain-drop-9  { height: 48px; left: 76%; top: -12%; animation: rainFall 4.1s infinite linear 0.4s; }
+.rain-drop-10 { height: 36px; left: 85%; top: -9%;  animation: rainFall 3.9s infinite linear 2.0s; }
+.rain-drop-11 { height: 44px; left: 92%; top: -10%; animation: rainFall 4.3s infinite linear 1.0s; }
+.rain-drop-12 { height: 32px; left: 4%;  top: -8%;  animation: rainFall 3.4s infinite linear 2.6s; }
+.rain-drop-13 { height: 46px; left: 38%; top: -11%; animation: rainFall 4.6s infinite linear 3.0s; }
+.rain-drop-14 { height: 34px; left: 55%; top: -9%;  animation: rainFall 3.3s infinite linear 1.7s; }
+.rain-drop-15 { height: 41px; left: 72%; top: -10%; animation: rainFall 4.0s infinite linear 2.8s; }
 
-.hud-line-2 {
-  top: 70%;
-  right: 0;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: right;
-  animation: scanline 4s infinite linear 1s;
-}
-
-@keyframes scanline {
-  0% { transform: scaleX(0); opacity: 1; }
-  50% { transform: scaleX(1); opacity: 0.5; }
-  100% { transform: scaleX(0); opacity: 0; }
+@keyframes rainFall {
+  0%   { transform: translateY(0); opacity: 0; }
+  5%   { opacity: 0.4; }
+  50%  { opacity: 0.6; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(calc(100vh * 0.45)); opacity: 0; }
 }
 
 

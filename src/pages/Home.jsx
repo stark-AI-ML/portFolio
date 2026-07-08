@@ -126,7 +126,7 @@ export default function Home({ data }) {
       setCurrentBanner(personal.bannerImage)
     }
 
-    const themes = ['space', 'ironman']
+    const themes = ['space', 'rain']
     setCurrentTheme(themes[Math.floor(Math.random() * themes.length)])
   }, [personal.bannerImages, personal.bannerImage])
 
@@ -154,16 +154,29 @@ export default function Home({ data }) {
               <div className="shooting-star star-2"></div>
               <div className="shooting-star star-3"></div>
               <div className="shooting-star star-4"></div>
+              <div className="shooting-star star-5"></div>
+              <div className="shooting-star star-6"></div>
+              <div className="shooting-star star-7"></div>
             </>
           )}
 
-          {currentTheme === 'ironman' && (
+          {currentTheme === 'rain' && (
             <>
-              <div className="arc-reactor">
-                <div className="core"></div>
-              </div>
-              <div className="hud-line hud-line-1"></div>
-              <div className="hud-line hud-line-2"></div>
+              <div className="rain-drop rain-drop-1"></div>
+              <div className="rain-drop rain-drop-2"></div>
+              <div className="rain-drop rain-drop-3"></div>
+              <div className="rain-drop rain-drop-4"></div>
+              <div className="rain-drop rain-drop-5"></div>
+              <div className="rain-drop rain-drop-6"></div>
+              <div className="rain-drop rain-drop-7"></div>
+              <div className="rain-drop rain-drop-8"></div>
+              <div className="rain-drop rain-drop-9"></div>
+              <div className="rain-drop rain-drop-10"></div>
+              <div className="rain-drop rain-drop-11"></div>
+              <div className="rain-drop rain-drop-12"></div>
+              <div className="rain-drop rain-drop-13"></div>
+              <div className="rain-drop rain-drop-14"></div>
+              <div className="rain-drop rain-drop-15"></div>
             </>
           )}
         </div>
