@@ -1,32 +1,46 @@
+import React, { useEffect, useRef } from 'react'
 import { ExternalLinkIcon } from '../components/Icons'
+import { initScrollObserver } from '../lib/animations'
 
 export default function Blog({ data }) {
   const { writings } = data
+  const mainRef = useRef(null)
+
+  useEffect(() => {
+    if (!mainRef.current) return
+    const cleanup = initScrollObserver(mainRef.current)
+    return cleanup
+  }, [])
 
   return (
-    <main className="container" style={{ paddingBottom: '0', minHeight: '60vh' }}>
-      <div className="animate-in delay-1">
-        <h1 className="text-2xl font-bold text-foreground" style={{ fontSize: '2rem', marginBottom: '0.5rem', marginTop: '1rem' }}>Blog</h1>
-        <p style={{ fontSize: '14px', color: 'var(--muted)', marginBottom: '2.5rem' }}>Thoughts on backend engineering, system architecture, and deep tech.</p>
+    <main ref={mainRef} className="container" style={{ paddingBottom: '3rem', paddingTop: '1.5rem', minHeight: '65vh' }}>
+      <div>
+        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Essays & Notes</h1>
+        <p style={{ fontSize: '0.95rem', color: 'var(--muted)', marginBottom: '2rem' }}>
+          Thoughts on backend engineering, distributed systems, and deep tech.
+        </p>
       </div>
 
-      <div className="animate-in delay-2">
+      <div className="reveal-on-scroll">
         {writings && writings.length > 0 ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="writings-list">
             {writings.map((w, i) => (
-              <a key={i} href={w.link} target="_blank" rel="noreferrer" className="project-card" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '1.25rem' }}>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: '15px', fontWeight: 600, color: '#f4f4f5' }}>{w.title}</h3>
-                  <p style={{ fontSize: '12px', color: 'var(--muted)', marginTop: '0.3rem' }}>Published on {w.platform} • {w.date}</p>
+              <a key={i} href={w.link} target="_blank" rel="noreferrer" className="writing-row">
+                <div>
+                  <h3 className="writing-title">{w.title}</h3>
+                  <p className="writing-meta">Published on {w.platform} · {w.date}</p>
                 </div>
-                <div className="project-link" style={{ margin: 0 }}>
+                <div className="writing-arrow" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span className="mono" style={{ fontSize: '0.8rem' }}>Read</span>
                   <ExternalLinkIcon />
                 </div>
               </a>
             ))}
           </div>
         ) : (
-          <p style={{ color: 'var(--muted)', fontSize: '14px', fontStyle: 'italic' }}>No posts yet. Check back soon!</p>
+          <p style={{ color: 'var(--muted)', fontSize: '0.95rem', fontStyle: 'italic' }}>
+            No essays published yet. Check back soon!
+          </p>
         )}
       </div>
     </main>

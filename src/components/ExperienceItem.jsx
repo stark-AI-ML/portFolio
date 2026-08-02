@@ -1,38 +1,82 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { ChevronIcon } from './Icons'
+import { animateAccordion } from '../lib/animations'
 
 export default function ExperienceItem({ exp }) {
   const [open, setOpen] = useState(false)
+  const descRef = useRef(null)
+  const isInitialMount = useRef(true)
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
+    if (descRef.current) {
+      animateAccordion(descRef.current, open)
+    }
+  }, [open])
+
   return (
-    <div className="experience-item" style={{ flexDirection: 'column', borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1rem' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer', width: '100%' }} onClick={() => setOpen(!open)} role="button" tabIndex={0}>
-        <div className="experience-logo">
-          {exp.logo ? <img src={exp.logo} alt={exp.company} /> : <span style={{ color: 'var(--muted)', fontWeight: 600, fontSize: '1.1rem' }}>{exp.company[0]}</span>}
-        </div>
-        <div className="experience-info">
-          <div className="experience-header">
-            {exp.url ? (
-              <a href={exp.url} target="_blank" rel="noreferrer" className="experience-company" onClick={e => e.stopPropagation()}>{exp.company}</a>
-            ) : (
-              <span className="experience-company">{exp.company}</span>
-            )}
-            <span className="experience-role">{exp.type}</span>
+    <div className="experience-item">
+      <div 
+        className="experience-card" 
+        onClick={() => setOpen(!open)} 
+        role="button" 
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            setOpen(!open)
+          }
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem' }}>
+          <div style={{ flex: 1 }}>
+            <div className="experience-header">
+              {exp.url ? (
+                <a 
+                  href={exp.url} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="experience-company" 
+                  onClick={e => e.stopPropagation()}
+                >
+                  {exp.company}
+                </a>
+              ) : (
+                <span className="experience-company">{exp.company}</span>
+              )}
+              <span className="experience-role-badge">{exp.type}</span>
+            </div>
+            <p className="experience-subtitle">{exp.role}</p>
           </div>
-          <p className="experience-subtitle">{exp.role}</p>
-        </div>
-        <div className="experience-meta">
-          <p className="experience-date">{exp.period}</p>
-          <p className="experience-location">{exp.location}</p>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.25rem' }}>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+            <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{exp.period}</span>
             <ChevronIcon expanded={open} />
           </div>
         </div>
-      </div>
-      {open && exp.description && (
-        <div style={{ paddingLeft: '3.5rem', paddingTop: '0.5rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--muted)', lineHeight: 1.6 }}>{exp.description}</p>
+
+        <div className="experience-meta">
+          <span>{exp.location}</span>
+          {exp.description && (
+            <span style={{ fontSize: '0.7rem', color: 'var(--accent)', opacity: 0.85 }}>
+              {open ? 'Hide details' : 'View details'}
+            </span>
+          )}
         </div>
-      )}
+
+        {exp.description && (
+          <div 
+            ref={descRef} 
+            className="experience-desc"
+            style={{ display: 'none' }}
+          >
+            {exp.description}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

@@ -1,49 +1,98 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { GitHubCalendar } from 'react-github-calendar'
 import { Tooltip } from 'react-tooltip'
-import ExperienceItem from '../components/ExperienceItem'
+import { initScrollObserver } from '../lib/animations'
+
 export default function About({ data }) {
-  const { personal, experience, github, stack } = data
+  const { personal, github, stack } = data
+  const mainRef = useRef(null)
+
+  useEffect(() => {
+    if (!mainRef.current) return
+    const cleanup = initScrollObserver(mainRef.current)
+    return cleanup
+  }, [])
 
   const selectLast10Months = contributions => {
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth();
-    const shownMonths = 10;
+    const currentYear = new Date().getFullYear()
+    const currentMonth = new Date().getMonth()
+    const shownMonths = 10
     return contributions.filter(day => {
-      const date = new Date(day.date);
-      const monthDiff = currentMonth - date.getMonth() + (12 * (currentYear - date.getFullYear()));
-      return monthDiff < shownMonths;
-    });
-  };
+      const date = new Date(day.date)
+      const monthDiff = currentMonth - date.getMonth() + 12 * (currentYear - date.getFullYear())
+      return monthDiff < shownMonths
+    })
+  }
 
   return (
-    <main className="container" style={{ paddingBottom: '0' }}>
-      <div className="animate-in delay-1">
-        <h1 className="text-2xl font-bold text-foreground" style={{ fontSize: '2rem', marginBottom: '1.5rem', marginTop: '1rem' }}>About</h1>
+    <main ref={mainRef} className="container" style={{ paddingBottom: '3rem', paddingTop: '1.5rem' }}>
+      <div>
+        <h1 style={{ fontSize: '2rem', marginBottom: '1.25rem' }}>About Me</h1>
       </div>
 
-      <div className="animate-in delay-2">
-        <section style={{ marginBottom: '2.5rem' }}>
-          {personal.about && personal.about.map((paragraph, idx) => (
-            <p key={idx} style={{ fontSize: '14px', color: 'var(--muted)', lineHeight: 1.7, marginBottom: '1rem' }}>
-              {paragraph}
-            </p>
-          ))}
+      {/* Bio Paragraphs */}
+      <section style={{ marginBottom: '2.5rem' }}>
+        {personal.about && personal.about.map((paragraph, idx) => (
+          <p key={idx} style={{ fontSize: '1rem', color: 'var(--muted-light)', lineHeight: 1.75, marginBottom: '1.25rem' }}>
+            {paragraph}
+          </p>
+        ))}
+      </section>
+
+      {/* Technical Stack (Bento Grid) */}
+      {stack && (
+        <section className="reveal-on-scroll" style={{ marginBottom: '3rem' }}>
+          <h2 className="section-title">Technical Craft & Stack</h2>
+          <div className="bento-grid" style={{ marginTop: '1rem' }}>
+            {stack.languages && (
+              <div className="bento-card">
+                <span className="bento-title">Languages</span>
+                <div className="bento-tags">
+                  {stack.languages.map((item, i) => (
+                    <span key={i} className="bento-pill">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {stack.frameworks && (
+              <div className="bento-card">
+                <span className="bento-title">Frameworks & APIs</span>
+                <div className="bento-tags">
+                  {stack.frameworks.map((item, i) => (
+                    <span key={i} className="bento-pill">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {stack.tools && (
+              <div className="bento-card">
+                <span className="bento-title">Systems & Infrastructure</span>
+                <div className="bento-tags">
+                  {stack.tools.map((item, i) => (
+                    <span key={i} className="bento-pill">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </section>
-      </div>
+      )}
 
+      {/* Open Source Contributions */}
       {github && github.showContributions && github.username && (
-        <div className="animate-in delay-3" style={{ marginBottom: '2.5rem' }}>
-          <h2 className="section-title" style={{ marginTop: 0, marginBottom: '1rem' }}>Contributions</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden' }}>
+        <section className="reveal-on-scroll" style={{ marginBottom: '2.5rem' }}>
+          <h2 className="section-title">Open Source Contributions</h2>
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden', padding: '1rem 0' }}>
             <div style={{ width: 'max-content' }}>
               <GitHubCalendar 
                 username={github.username} 
                 transformData={selectLast10Months}
                 colorScheme="dark"
                 theme={{
-                  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-                  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                  light: ['#18181f', '#27272a', '#3f3f46', '#f59e0b', '#fbbf24'],
+                  dark: ['#131317', '#27272a', '#3f3f46', '#d97706', '#f59e0b'],
                 }}
                 fontSize={12}
                 blockSize={12}
@@ -57,53 +106,7 @@ export default function About({ data }) {
               <Tooltip id="react-tooltip" />
             </div>
           </div>
-        </div>
-      )}
-
-      {experience && experience.length > 0 && (
-        <div className="animate-in delay-4" style={{ marginBottom: '2.5rem' }}>
-          <h2 className="section-title" style={{ marginTop: 0 }}>Experience So Far</h2>
-          <div className="experience-list">
-            {experience.map((exp, i) => (
-              <ExperienceItem key={i} exp={exp} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {stack && (
-        <div className="animate-in delay-5" style={{ marginBottom: '2.5rem' }}>
-          <h2 className="section-title" style={{ marginTop: 0 }}>Stack & Tools</h2>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div>
-              <h3 style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--muted)', marginBottom: '0.75rem', fontWeight: 600 }}>Languages</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {stack.languages.map((item, i) => (
-                  <span key={i} className="social-link" style={{ fontSize: '12px', padding: '0.4rem 0.8rem' }}>{item}</span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--muted)', marginBottom: '0.75rem', fontWeight: 600 }}>Frameworks</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {stack.frameworks.map((item, i) => (
-                  <span key={i} className="social-link" style={{ fontSize: '12px', padding: '0.4rem 0.8rem' }}>{item}</span>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--muted)', marginBottom: '0.75rem', fontWeight: 600 }}>Tools</h3>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {stack.tools.map((item, i) => (
-                  <span key={i} className="social-link" style={{ fontSize: '12px', padding: '0.4rem 0.8rem' }}>{item}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        </section>
       )}
     </main>
   )

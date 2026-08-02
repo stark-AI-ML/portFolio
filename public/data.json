@@ -5,7 +5,7 @@
     "avatar": "https://avatars.githubusercontent.com/u/116168398?v=4",
     "bannerImages": [
       "/space_banner.png",
-      "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&w=2000"
+      "/anime_banner.png"
     ],
     "bio": [
       "Building high-performance APIs, distributed systems, and data pipelines.",
@@ -17,7 +17,7 @@
       "My biggest strength isn't a specific framework or language — it's adaptability. I'm comfortable moving across technologies, learning what's needed, and turning new ideas into working products. For me, growth comes from building, shipping, and repeating the process."
     ],
     "profileViews": 5,
-    "email": "reslikefoot00@gmail.com",
+    "email": "rslikefoot00@gmail.com",
     "socials": {
       "github": "https://github.com/stark-AI-ML",
       "linkedin": "https://www.linkedin.com/in/rudresh-singh-a28967241/",
@@ -30,20 +30,19 @@
     "showContributions": true
   },
   "writings": [
-      {
+    {
       "title": "Bash Tutorial for starters",
       "date": "Nov 2024",
       "link": "https://bash-rudresh.hashnode.dev/bash-starter",
       "platform": "Hashnode"
     },
     {
-      "title": "Bash Tutorial fro Mid to ADV",
+      "title": "Bash Tutorial for Mid to ADV",
       "date": "Nov 2024",
       "link": "https://bash-rudresh.hashnode.dev/bashmidadv",
       "platform": "Hashnode"
     }
   ],
-
   "projects": [
     {
       "id": "bodh-ecosystem",
@@ -57,9 +56,9 @@
         "Reduced query latency from 300ms to <20ms with Redis TTL caching",
         "Advanced PostgreSQL indexing: GIN, BRIN, JSONB, Full-Text Search on partitioned tables",
         "Custom Redis Lua-script rate limiter (Token Bucket: per-minute + daily quotas)",
-        "Docker internal network (shared_private_net) isolating Postgres/Redis from public access",
+        "Docker internal network isolating Postgres/Redis from public access",
         "Nginx reverse proxy for IP-based rate limiting on sensitive routes",
-        "Playwright + BullMQ data ingestion pipeline for autonomous transcript scraping",
+        "Playwright + BullMQ data ingestion pipeline for autonomous scraping",
         "dbmate automated schema migrations in Docker Compose lifecycle"
       ],
       "links": {
@@ -81,7 +80,7 @@
         "Built with CRXJS Vite Plugin for modern Chrome Extension development"
       ],
       "links": {
-        "github": "https://github.com/stark-AI-ML/saraanshV0.1", 
+        "github": "https://github.com/stark-AI-ML/saraanshV0.1",
         "live": "https://saraansh-wine.vercel.app/"
       }
     },
@@ -96,35 +95,33 @@
       "highlights": [
         "garudah-backend: Node.js service for processing massive GDP and demographic datasets",
         "IndiaGeoVector GeoJSON integration for state-level geographic rendering",
-        "Data pipeline for religion and economic statistics insertion"
+        "Data pipeline for economic statistics insertion"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/niriksana1.0"
       }
-    }, 
-     {
-      "id": "chatSever",
+    },
+    {
+      "id": "chatServer",
       "name": "Server-Client-Chat-server",
       "status": "Active",
       "link": "https://github.com/stark-AI-ML/Server-Client-Chat-server-",
       "image": "./client_server.png",
-      "tech": ["React", "Vite", "Node.js", "Express"],
-      "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
+      "tech": ["Node.js", "Express", "Vite"],
+      "description": "High-performance multi-threaded C++ client-server socket communication engine built with Winsock API.",
       "highlights": [
-        "creating Chat Server with C++ & Winsock lib"
+        "Built high-throughput multi-threaded TCP socket architecture with C++ & Winsock API",
+        "Implemented non-blocking event polling for concurrent client socket connections",
+        "Engineered custom packet serializer for low-latency messaging"
       ],
       "links": {
-        "github": "https://github.com/stark-AI-ML/niriksana1.0"
+        "github": "https://github.com/stark-AI-ML/Server-Client-Chat-server-"
       }
     }
-
-
-
-    
   ],
   "stack": {
-    "languages": ["JavaScript", "TypeScript", "Python", "SQL"],
-    "frameworks": ["React", "Node.js", "Express"],
-    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright", "BullMQ"]
+    "languages": ["JavaScript", "TypeScript", "Python", "SQL", "C++"],
+    "frameworks": ["React", "Node.js", "Express", "FastAPI"],
+    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright", "BullMQ", "Nginx"]
   }
 }

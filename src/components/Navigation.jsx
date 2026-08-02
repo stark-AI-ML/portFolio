@@ -1,18 +1,24 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 export default function Navigation() {
   return (
-    <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 1.5rem' }}>
+    <div className="header-wrapper">
       <header className="header">
-        <NavLink to="/" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-          Home
-        </NavLink>
-        <NavLink to="/about" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-          About
-        </NavLink>
-        <NavLink to="/blog" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-          Blog
-        </NavLink>
+        <Link to="/" className="brand-mark" aria-label="Home">
+          <span>rudresh</span>
+          <span className="brand-dot"></span>
+        </Link>
+        <nav className="nav-links">
+          <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Home
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            About
+          </NavLink>
+          <NavLink to="/blog" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
+            Blog
+          </NavLink>
+        </nav>
       </header>
     </div>
   )
