@@ -5,38 +5,40 @@ export default function Blog({ data }) {
   const { writings } = data
 
   return (
-    <div className="container" style={{ paddingTop: '2rem' }}>
-      <div className="section-header" style={{ marginTop: 0 }}>
-        <div className="section-title">
-          <span className="prefix">//</span>
-          <span>Technical Writings & Notes</span>
-        </div>
-        <div className="section-divider"></div>
-      </div>
-
-      <p style={{ color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-        Technical investigations, post-mortems, and architectural notes from building backend systems.
+    <main className="container" style={{ paddingBottom: '0', minHeight: '60vh', paddingTop: '2rem' }}>
+      <h1 style={{ fontSize: '2.1rem', fontWeight: 700, marginBottom: '0.4rem', color: 'var(--fg-heading)' }}>
+        Blog
+      </h1>
+      <p style={{ fontSize: '1rem', color: 'var(--muted)', marginBottom: '2.25rem', fontStyle: 'italic' }}>
+        Thoughts on backend engineering, system architecture, and deep tech.
       </p>
 
-      <div className="writings-list">
-        {writings && writings.map((article, idx) => (
-          <a 
-            key={idx} 
-            href={article.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="writing-row"
-          >
-            <div>
-              <div className="writing-title">{article.title}</div>
-              <div className="writing-meta">{article.platform} • {article.date}</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--muted)' }}>
-              <ExternalLinkIcon />
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
+      {writings && writings.length > 0 ? (
+        <div className="writings-list">
+          {writings.map((w, i) => (
+            <a 
+              key={i} 
+              href={w.link} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="writing-row"
+              style={{ padding: '1.1rem 1.35rem' }}
+            >
+              <div>
+                <div className="writing-title">{w.title}</div>
+                <div className="writing-meta">Published on {w.platform} • {w.date}</div>
+              </div>
+              <div style={{ color: 'var(--muted)', display: 'flex', alignItems: 'center' }}>
+                <ExternalLinkIcon />
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p style={{ color: 'var(--muted)', fontSize: '0.95rem', fontStyle: 'italic' }}>
+          No posts yet. Check back soon!
+        </p>
+      )}
+    </main>
   )
 }

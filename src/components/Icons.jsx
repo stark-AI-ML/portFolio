@@ -65,6 +65,12 @@ export const socialIcons = {
   email: MailIcon
 }
 
+export const PlaywrightIcon = () => (
+  <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" className="icon" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.874 13.914c.264-.53.407-1.127.407-1.748 0-1.89-1.34-3.46-3.134-3.805-.333-.762-.876-1.408-1.564-1.848a4.34 4.34 0 0 0-2.383-.69c-1.36 0-2.583.627-3.393 1.608-.57-.22-1.194-.34-1.847-.34-2.73 0-4.945 2.215-4.945 4.946 0 1.25.467 2.39 1.238 3.262A5.438 5.438 0 0 0 7.42 20.3c2.72 0 4.95-2.02 5.3-4.66.42.17.88.26 1.36.26.96 0 1.83-.37 2.48-.98a3.917 3.917 0 0 0 2.314-1.006z" />
+  </svg>
+)
+
 import {
   SiNodedotjs,
   SiExpress,
@@ -74,20 +80,38 @@ import {
   SiNginx,
   SiGooglechrome,
   SiVite,
-  SiReact
+  SiReact,
+  SiJavascript,
+  SiTypescript,
+  SiPython,
+  SiCplusplus,
+  SiFastapi,
+  SiGit,
+  SiLinux
 } from 'react-icons/si'
 
-import { FaAws } from 'react-icons/fa'
+import { FaAws, FaDatabase } from 'react-icons/fa'
 
 export const TechIcons = {
+  'JavaScript': SiJavascript,
+  'TypeScript': SiTypescript,
+  'Python': SiPython,
+  'SQL': FaDatabase,
+  'C++': SiCplusplus,
+  'React': SiReact,
   'Node.js': SiNodedotjs,
   'Express': SiExpress,
-  'PostgreSQL': SiPostgresql,
-  'Redis': SiRedis,
+  'FastAPI': SiFastapi,
   'Docker': SiDocker,
   'AWS': FaAws,
+  'PostgreSQL': SiPostgresql,
+  'Redis': SiRedis,
+  'Git': SiGit,
+  'Playwright': PlaywrightIcon,
+  'BullMQ': SiRedis,
   'Nginx': SiNginx,
   'Google Chrome': SiGooglechrome,
   'Vite': SiVite,
-  'React': SiReact
+  'Linux': SiLinux
 }
+

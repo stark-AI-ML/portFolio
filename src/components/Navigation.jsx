@@ -1,22 +1,22 @@
-import { NavLink, Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export default function Navigation() {
   return (
     <div className="header-wrapper">
       <header className="header">
-        <Link to="/" className="brand-mark" aria-label="Home">
-          <span>rudresh</span>
-          <span className="brand-dot">/</span>
+        <Link to="/" className="nav-brand" aria-label="Rudresh Singh Home">
+          rs<span className="brand-dot">.</span>
         </Link>
+
         <nav className="nav-links">
           <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            // home
+            Home
           </NavLink>
           <NavLink to="/about" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            // about
+            About
           </NavLink>
           <NavLink to="/blog" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            // blog
+            Blog
           </NavLink>
         </nav>
       </header>

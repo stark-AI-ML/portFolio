@@ -1,104 +1,124 @@
-import anime from './anime'
-
 /**
- * Orchestrates the hero entrance animation timeline on page mount.
+ * Portfolio v3 Motion Engine
+ * High-performance, hardware-accelerated micro-animations & entrance choreography
+ * Vintage editorial aesthetic with organic easing curves
  */
-export function animateHeroEntrance(container) {
-  if (!container) return
 
-  const tl = anime.timeline({
-    easing: 'easeOutExpo'
-  })
-
-  tl.add({
-    targets: container.querySelectorAll('.hero-banner'),
-    opacity: [0, 1],
-    scale: [1.04, 1],
-    duration: 900
-  })
-  .add({
-    targets: container.querySelectorAll('.hero-profile'),
-    opacity: [0, 1],
-    translateY: [24, 0],
-    duration: 650
-  }, '-=500')
-  .add({
-    targets: container.querySelectorAll('.hero-name-title'),
-    opacity: [0, 1],
-    translateX: [-12, 0],
-    duration: 500
-  }, '-=350')
-  .add({
-    targets: container.querySelectorAll('.hero-desc p'),
-    opacity: [0, 1],
-    translateY: [12, 0],
-    duration: 550,
-    delay: anime.stagger(70)
-  }, '-=250')
-  .add({
-    targets: container.querySelectorAll('.button-group .btn'),
-    opacity: [0, 1],
-    translateY: [10, 0],
-    duration: 450,
-    delay: anime.stagger(80)
-  }, '-=200')
-  .add({
-    targets: container.querySelectorAll('.social-link'),
-    opacity: [0, 1],
-    translateY: [8, 0],
-    duration: 450,
-    delay: anime.stagger(40)
-  }, '-=200')
-
-  return tl
+// Custom ease curves matching classic analog feel
+export const EASING = {
+  easeOutExpo: 'cubic-bezier(0.16, 1, 0.3, 1)',
+  easeOutCubic: 'cubic-bezier(0.33, 1, 0.68, 1)',
+  easeInOutQuad: 'cubic-bezier(0.45, 0, 0.55, 1)',
+  vintageSpring: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 }
 
 /**
- * Initializes IntersectionObserver for elements with .reveal-on-scroll.
- * Returns a cleanup function.
+ * Animate hero section on initial page load with a silky-smooth staggered entrance
  */
-export function initScrollObserver(container) {
-  if (!container || typeof IntersectionObserver === 'undefined') return () => {}
+export function animateHeroEntrance() {
+  if (typeof window === 'undefined') return
 
-  const elements = container.querySelectorAll('.reveal-on-scroll')
-  if (!elements.length) return () => {}
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.hero-banner, .hero-profile, .hero-desc, .button-group, .social-links').forEach(el => {
+      el.style.opacity = '1'
+      el.style.transform = 'none'
+    })
+    return
+  }
 
-  // Set initial state
-  elements.forEach(el => {
-    if (!el.dataset.revealed) {
-      el.style.opacity = '0'
-      el.style.transform = 'translate3d(0, 20px, 0)'
-    }
+  // 1. Hero Banner
+  const banner = document.querySelector('.hero-banner')
+  if (banner) {
+    banner.style.opacity = '0'
+    banner.style.transition = `opacity 850ms ${EASING.easeOutExpo}`
+    requestAnimationFrame(() => {
+      banner.style.opacity = '1'
+    })
+  }
+
+  // 2. Profile Avatar & Name Info
+  const profile = document.querySelector('.hero-profile')
+  if (profile) {
+    profile.style.opacity = '0'
+    profile.style.transform = 'translateY(18px)'
+    profile.style.transition = `opacity 700ms ${EASING.easeOutExpo} 150ms, transform 700ms ${EASING.easeOutExpo} 150ms`
+    requestAnimationFrame(() => {
+      profile.style.opacity = '1'
+      profile.style.transform = 'translateY(0)'
+    })
+  }
+
+  // 3. Bio Paragraphs
+  const bio = document.querySelector('.hero-desc')
+  if (bio) {
+    bio.style.opacity = '0'
+    bio.style.transform = 'translateY(12px)'
+    bio.style.transition = `opacity 650ms ${EASING.easeOutExpo} 300ms, transform 650ms ${EASING.easeOutExpo} 300ms`
+    requestAnimationFrame(() => {
+      bio.style.opacity = '1'
+      bio.style.transform = 'translateY(0)'
+    })
+  }
+
+  // 4. Action Buttons
+  const buttons = document.querySelector('.button-group')
+  if (buttons) {
+    buttons.style.opacity = '0'
+    buttons.style.transform = 'translateY(10px)'
+    buttons.style.transition = `opacity 600ms ${EASING.easeOutExpo} 400ms, transform 600ms ${EASING.easeOutExpo} 400ms`
+    requestAnimationFrame(() => {
+      buttons.style.opacity = '1'
+      buttons.style.transform = 'translateY(0)'
+    })
+  }
+
+  // 5. Social Links (Staggered Children)
+  const socialPills = document.querySelectorAll('.social-link')
+  socialPills.forEach((pill, idx) => {
+    pill.style.opacity = '0'
+    pill.style.transform = 'translateY(8px)'
+    pill.style.transition = `opacity 500ms ${EASING.easeOutExpo} ${480 + idx * 60}ms, transform 500ms ${EASING.easeOutExpo} ${480 + idx * 60}ms`
+    requestAnimationFrame(() => {
+      pill.style.opacity = '1'
+      pill.style.transform = 'translateY(0)'
+    })
   })
+}
+
+/**
+ * Initializes IntersectionObserver for scroll-triggered section elevations
+ */
+export function initScrollObserver() {
+  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return () => {}
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (prefersReducedMotion) return () => {}
+
+  const elements = document.querySelectorAll('.reveal-on-scroll')
 
   const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.dataset.revealed) {
-          entry.target.dataset.revealed = 'true'
-          anime({
-            targets: entry.target,
-            opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 700,
-            easing: 'easeOutCubic'
-          })
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed')
           observer.unobserve(entry.target)
         }
       })
     },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    }
   )
 
-  elements.forEach(el => observer.observe(el))
+  elements.forEach((el) => observer.observe(el))
 
-  return () => {
-    observer.disconnect()
-  }
+  return () => observer.disconnect()
 }
 
 /**
- * Smoothly animates accordion content for Experience items.
+ * Smooth height & opacity expansion for experience timeline items
  */
 export function animateAccordion(element, isOpen) {
   if (!element) return
@@ -106,34 +126,24 @@ export function animateAccordion(element, isOpen) {
   if (isOpen) {
     element.style.display = 'block'
     element.style.overflow = 'hidden'
-    const fullHeight = element.scrollHeight
+    element.style.maxHeight = '0px'
+    element.style.opacity = '0'
+    element.style.transition = `max-height 350ms ${EASING.easeOutExpo}, opacity 350ms ${EASING.easeOutExpo}`
 
-    anime({
-      targets: element,
-      height: [0, fullHeight],
-      opacity: [0, 1],
-      duration: 350,
-      easing: 'easeOutQuad',
-      complete: () => {
-        element.style.height = 'auto'
-        element.style.overflow = 'visible'
-      }
+    requestAnimationFrame(() => {
+      const scrollHeight = element.scrollHeight
+      element.style.maxHeight = `${scrollHeight + 20}px`
+      element.style.opacity = '1'
     })
   } else {
     element.style.overflow = 'hidden'
-    const curHeight = element.scrollHeight
+    element.style.maxHeight = `${element.scrollHeight}px`
+    element.style.opacity = '1'
+    element.style.transition = `max-height 250ms ${EASING.easeInOutQuad}, opacity 200ms ${EASING.easeInOutQuad}`
 
-    anime({
-      targets: element,
-      height: [curHeight, 0],
-      opacity: [1, 0],
-      duration: 250,
-      easing: 'easeInQuad',
-      complete: () => {
-        element.style.display = 'none'
-      }
+    requestAnimationFrame(() => {
+      element.style.maxHeight = '0px'
+      element.style.opacity = '0'
     })
   }
 }
-
-export { anime }

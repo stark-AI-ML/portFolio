@@ -29,6 +29,17 @@
     "username": "stark-AI-ML",
     "showContributions": true
   },
+  "experience": [
+    {
+      "company": "Open Source & Systems Engineering",
+      "role": "Backend & Distributed Systems Contributor",
+      "period": "2024 — Present",
+      "location": "Remote",
+      "type": "Engineering",
+      "description": "Architecting high-throughput data scraping engines, caching layers with Redis, partitioned PostgreSQL schemas, and Dockerized microservices.",
+      "url": "https://github.com/stark-AI-ML"
+    }
+  ],
   "writings": [
     {
       "title": "Bash Tutorial for starters",
@@ -56,9 +67,9 @@
         "Reduced query latency from 300ms to <20ms with Redis TTL caching",
         "Advanced PostgreSQL indexing: GIN, BRIN, JSONB, Full-Text Search on partitioned tables",
         "Custom Redis Lua-script rate limiter (Token Bucket: per-minute + daily quotas)",
-        "Docker internal network isolating Postgres/Redis from public access",
+        "Docker internal network (shared_private_net) isolating Postgres/Redis from public access",
         "Nginx reverse proxy for IP-based rate limiting on sensitive routes",
-        "Playwright + BullMQ data ingestion pipeline for autonomous scraping",
+        "Playwright + BullMQ data ingestion pipeline for autonomous transcript scraping",
         "dbmate automated schema migrations in Docker Compose lifecycle"
       ],
       "links": {
@@ -95,7 +106,7 @@
       "highlights": [
         "garudah-backend: Node.js service for processing massive GDP and demographic datasets",
         "IndiaGeoVector GeoJSON integration for state-level geographic rendering",
-        "Data pipeline for economic statistics insertion"
+        "Data pipeline for religion and economic statistics insertion"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/niriksana1.0"
@@ -108,11 +119,11 @@
       "link": "https://github.com/stark-AI-ML/Server-Client-Chat-server-",
       "image": "./client_server.png",
       "tech": ["Node.js", "Express", "Vite"],
-      "description": "High-performance multi-threaded C++ client-server socket communication engine built with Winsock API.",
+      "description": "High-concurrency multi-threaded TCP chat server built with C++ and Winsock / POSIX sockets.",
       "highlights": [
-        "Built high-throughput multi-threaded TCP socket architecture with C++ & Winsock API",
+        "Engineered multi-threaded TCP socket communication architecture with C++ & Winsock API",
         "Implemented non-blocking event polling for concurrent client socket connections",
-        "Engineered custom packet serializer for low-latency messaging"
+        "Built custom packet serialization protocol for real-time low-latency messaging"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/Server-Client-Chat-server-"
@@ -120,7 +131,7 @@
     }
   ],
   "stack": {
-    "languages": ["JavaScript", "TypeScript", "Python", "SQL", "C++"],
+    "languages": ["C++","JavaScript", "TypeScript", "Go","Python", "SQL"],
     "frameworks": ["React", "Node.js", "Express", "FastAPI"],
     "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright", "BullMQ", "Nginx"]
   }

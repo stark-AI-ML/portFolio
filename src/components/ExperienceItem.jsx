@@ -1,82 +1,80 @@
-import { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import { ChevronIcon } from './Icons'
 import { animateAccordion } from '../lib/animations'
 
 export default function ExperienceItem({ exp }) {
   const [open, setOpen] = useState(false)
-  const descRef = useRef(null)
-  const isInitialMount = useRef(true)
+  const bodyRef = useRef(null)
 
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false
-      return
+  const toggleOpen = () => {
+    const nextState = !open
+    setOpen(nextState)
+    if (bodyRef.current) {
+      animateAccordion(bodyRef.current, nextState)
     }
-    if (descRef.current) {
-      animateAccordion(descRef.current, open)
-    }
-  }, [open])
+  }
 
   return (
     <div className="experience-item">
       <div 
-        className="experience-card" 
-        onClick={() => setOpen(!open)} 
-        role="button" 
+        className="experience-header-row" 
+        onClick={toggleOpen}
+        role="button"
         tabIndex={0}
+        aria-expanded={open}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault()
-            setOpen(!open)
+            toggleOpen()
           }
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '0.75rem' }}>
-          <div style={{ flex: 1 }}>
-            <div className="experience-header">
-              {exp.url ? (
-                <a 
-                  href={exp.url} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="experience-company" 
-                  onClick={e => e.stopPropagation()}
-                >
-                  {exp.company}
-                </a>
-              ) : (
-                <span className="experience-company">{exp.company}</span>
-              )}
-              <span className="experience-role-badge">{exp.type}</span>
-            </div>
-            <p className="experience-subtitle">{exp.role}</p>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
-            <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{exp.period}</span>
-            <ChevronIcon expanded={open} />
-          </div>
-        </div>
-
-        <div className="experience-meta">
-          <span>{exp.location}</span>
-          {exp.description && (
-            <span style={{ fontSize: '0.7rem', color: 'var(--accent)', opacity: 0.85 }}>
-              {open ? 'Hide details' : 'View details'}
-            </span>
+        <div className="experience-logo">
+          {exp.logo ? (
+            <img src={exp.logo} alt={exp.company} />
+          ) : (
+            <span>{exp.company ? exp.company[0] : 'E'}</span>
           )}
         </div>
 
-        {exp.description && (
-          <div 
-            ref={descRef} 
-            className="experience-desc"
-            style={{ display: 'none' }}
-          >
-            {exp.description}
+        <div className="experience-info">
+          <div className="experience-title-row">
+            {exp.url ? (
+              <a 
+                href={exp.url} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="experience-company"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {exp.company}
+              </a>
+            ) : (
+              <span className="experience-company">{exp.company}</span>
+            )}
+            {exp.type && <span className="experience-tag">{exp.type}</span>}
           </div>
-        )}
+          <div className="experience-role">{exp.role}</div>
+        </div>
+
+        <div className="experience-meta">
+          <span className="experience-date">{exp.period}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '0.2rem' }}>
+            <span className="experience-location">{exp.location}</span>
+            <ChevronIcon expanded={open} />
+          </div>
+        </div>
       </div>
+
+      {exp.description && (
+        <div 
+          ref={bodyRef}
+          className="experience-body" 
+          style={{ display: open ? 'block' : 'none' }}
+        >
+          <p>{exp.description}</p>
+        </div>
+      )}
     </div>
   )
 }
