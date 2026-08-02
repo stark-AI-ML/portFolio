@@ -5,385 +5,349 @@ import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
 import { 
   VerifiedBadge, 
-  EyeIcon, 
-  CalendarIcon, 
-  MailIcon, 
-  ResumeIcon, 
-  socialIcons, 
-  GithubIcon, 
   ExternalLinkIcon, 
+  GithubIcon, 
+  socialIcons, 
   TechIcons 
 } from '../components/Icons'
-import { animateHeroEntrance, initScrollObserver } from '../lib/animations'
-
-/* ─── Status Badge ─── */
-function StatusBadge({ status }) {
-  const cls = status === 'Live' ? 'status-live' : status === 'WIP' ? 'status-wip' : 'status-beta'
-  return <span className={`project-status ${cls}`}>{status === 'Live' && '• '}{status}</span>
-}
-
-/* ─── Project Card ─── */
-function ProjectCard({ project }) {
-  return (
-    <div className="project-card reveal-on-scroll">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-        <a 
-          href={project.links?.live || project.links?.github || '#'} 
-          target="_blank" 
-          rel="noreferrer" 
-          style={{ display: 'block' }}
-        >
-          <div className="project-image">
-            {project.image ? (
-              <img src={project.image} alt={project.name} />
-            ) : (
-              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#18181f' }}>
-                <span className="mono" style={{ fontSize: '1.25rem', color: 'var(--accent)', opacity: 0.6 }}>{'</>'}</span>
-                <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--muted)', marginTop: '0.35rem' }}>{project.name}</span>
-              </div>
-            )}
-          </div>
-        </a>
-        <div>
-          <div className="project-header">
-            <span className="project-title">{project.name}</span>
-            <StatusBadge status={project.status} />
-          </div>
-          <p className="project-desc">{project.description}</p>
-        </div>
-      </div>
-      <div className="project-tech">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
-          {project.tech && project.tech.map((t, i) => {
-            const Icon = TechIcons[t]
-            return Icon ? (
-              <span key={i} title={t} className="tech-icon-link">
-                <Icon />
-              </span>
-            ) : (
-              <span key={i} className="mono" style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>
-                {t}
-              </span>
-            )
-          })}
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-          {project.links?.github && (
-            <a href={project.links.github} target="_blank" rel="noreferrer" className="project-link" aria-label="View Source Code" title="View Source Code">
-              <GithubIcon />
-            </a>
-          )}
-          {project.links?.live && (
-            <a href={project.links.live} target="_blank" rel="noreferrer" className="project-link" aria-label="View Live Project" title="View Live Project">
-              <ExternalLinkIcon />
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ─── Featured Project Card ─── */
-function FeaturedCard({ project }) {
-  return (
-    <div className="project-card featured-card reveal-on-scroll">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <a 
-          href={project.links?.live || project.links?.github || '#'} 
-          target="_blank" 
-          rel="noreferrer" 
-          style={{ display: 'block' }}
-        >
-          <div className="project-image" style={{ aspectRatio: '21 / 9' }}>
-            {project.image ? (
-              <img src={project.image} alt={project.name} />
-            ) : null}
-          </div>
-        </a>
-
-        <div>
-          <div className="project-header">
-            <span className="project-title" style={{ fontSize: '1.2rem' }}>{project.name}</span>
-            <StatusBadge status={project.status} />
-          </div>
-          <p className="project-desc" style={{ marginTop: '0.4rem', marginBottom: '0.85rem', color: 'var(--muted-light)' }}>
-            {project.description}
-          </p>
-          {project.highlights && (
-            <div className="featured-highlights">
-              {project.highlights.map((h, i) => (
-                <div key={i} className="highlight-item">
-                  <span className="highlight-bullet">▸</span>
-                  <span>{h}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="project-tech" style={{ marginTop: '0.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
-          {project.tech && project.tech.map((t, i) => {
-            const Icon = TechIcons[t]
-            return Icon ? (
-              <span key={i} title={t} className="tech-icon-link">
-                <Icon />
-              </span>
-            ) : (
-              <span key={i} className="mono" style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>
-                {t}
-              </span>
-            )
-          })}
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
-          {project.links?.github && (
-            <a href={project.links.github} target="_blank" rel="noreferrer" className="project-link" aria-label="View Source Code" title="View Source Code">
-              <GithubIcon />
-            </a>
-          )}
-          {project.links?.live && (
-            <a href={project.links.live} target="_blank" rel="noreferrer" className="project-link" aria-label="View Live Project" title="View Live Project">
-              <ExternalLinkIcon />
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export default function Home({ data }) {
-  const { personal, projects, github, writings, stack } = data
-  const mainRef = useRef(null)
-
-  const [currentBanner, setCurrentBanner] = useState(null)
+  const { personal, projects, writings, technicalStack } = data
+  const [visitorLocation, setVisitorLocation] = useState(null)
+  const [profileViews, setProfileViews] = useState(null)
+  const containerRef = useRef(null)
 
   useEffect(() => {
-    if (personal.bannerImages && personal.bannerImages.length > 0) {
-      const randomIndex = Math.floor(Math.random() * personal.bannerImages.length)
-      setCurrentBanner(personal.bannerImages[randomIndex])
-    } else if (personal.bannerImage) {
-      setCurrentBanner(personal.bannerImage)
-    }
-  }, [personal.bannerImages, personal.bannerImage])
+    // Non-blocking fetch for visitor location if backend is present
+    fetch('http://localhost:5001/api/visitor')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.location) setVisitorLocation(data.location)
+      })
+      .catch(() => {}) // Silent fail if backend is offline
 
-  // Trigger Anime.js entrance timeline & scroll observer
-  useEffect(() => {
-    if (!mainRef.current) return
-    const heroTl = animateHeroEntrance(mainRef.current)
-    const cleanupScroll = initScrollObserver(mainRef.current)
+    // Non-blocking fetch for profile views if available
+    fetch('http://localhost:5001/api/views')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.views) setProfileViews(data.views)
+      })
+      .catch(() => {
+        setProfileViews(personal.profileViews || 124)
+      })
+  }, [personal.profileViews])
 
-    return () => {
-      if (heroTl && heroTl.pause) heroTl.pause()
-      if (cleanupScroll) cleanupScroll()
-    }
-  }, [])
-
-  const selectLast10Months = contributions => {
-    const currentYear = new Date().getFullYear()
-    const currentMonth = new Date().getMonth()
-    const shownMonths = 10
-    return contributions.filter(day => {
-      const date = new Date(day.date)
-      const monthDiff = currentMonth - date.getMonth() + 12 * (currentYear - date.getFullYear())
-      return monthDiff < shownMonths
-    })
-  }
+  const bannerImg = personal.bannerImages && personal.bannerImages.length > 0 
+    ? personal.bannerImages[0] 
+    : '/space_banner.png'
 
   return (
-    <main ref={mainRef} className="container" style={{ paddingBottom: '0', paddingTop: '1.25rem' }}>
-      {/* ── Hero Banner ── */}
-      <div>
-        <div className="hero-banner" key={currentBanner}>
-          {currentBanner && <img src={currentBanner} alt="Banner" />}
-          <div className="shooting-star star-1"></div>
-          <div className="shooting-star star-2"></div>
+    <div className="container" ref={containerRef}>
+      {/* 1. Classic v2 Banner with Organic Fade */}
+      <div className="banner-container">
+        <img 
+          src={bannerImg} 
+          alt="Banner cover" 
+          loading="eager"
+        />
+      </div>
+
+      {/* 2. Hero Profile */}
+      <div className="hero-profile">
+        <div className="hero-avatar-wrapper">
+          <img 
+            src={personal.avatar} 
+            alt={personal.name} 
+            className="hero-avatar" 
+          />
+        </div>
+        <div className="hero-info">
+          <div className="hero-name-title">
+            <h1>
+              {personal.name}
+              <VerifiedBadge />
+            </h1>
+            <div className="hero-title-text">
+              {personal.title}
+            </div>
+            <div className="hero-status-row">
+              <span className="live-indicator">
+                <span className="live-dot"></span>
+                <span>Open to opportunities</span>
+              </span>
+              {profileViews && (
+                <span className="profile-views">
+                  • {profileViews} views
+                </span>
+              )}
+              {visitorLocation && (
+                <span className="profile-views">
+                  • viewing from {visitorLocation}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ── Profile & Info ── */}
-      <div>
-        <div className="hero-profile">
-          <div className="hero-avatar-wrapper">
-            <img src={personal.avatar} alt={personal.name} className="hero-avatar" />
-          </div>
-          <div className="hero-info">
-            <div className="hero-name-title">
-              <h1>
-                {personal.name}
-                <VerifiedBadge />
-              </h1>
-              <p className="hero-title-text">{personal.title}</p>
-            </div>
-            
-            <div className="availability-badge">
-              <span className="pulse-dot"></span>
-              <span>Open to opportunities</span>
-            </div>
-
-            {personal.profileViews > 0 && (
-              <div className="hero-stats">
-                <EyeIcon />
-                <span>{personal.profileViews} profile views</span>
-              </div>
-            )}
-          </div>
-        </div>
+      {/* 3. Hero Bio */}
+      <div className="hero-bio">
+        <p>{personal.bio}</p>
+        <p style={{ color: 'var(--muted)', fontSize: '0.875rem' }}>
+          Focused on distributed architectures, high-throughput message queues, database internals, and systems optimization.
+        </p>
       </div>
 
-      {/* ── Bio & CTAs ── */}
-      <div>
-        <div className="hero-desc">
-          {personal.bio.map((line, i) => (
-            <p key={i}>{line}</p>
-          ))}
-        </div>
+      {/* 4. Action Buttons */}
+      <div className="button-group">
+        <a href="#projects" className="btn btn-primary">
+          <span>// View Work</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" width="14" height="14">
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
+        <a href={`mailto:${personal.email}`} className="btn btn-outline">
+          <span>// Contact Me</span>
+          <ExternalLinkIcon />
+        </a>
+      </div>
 
-        {/* Action Buttons */}
-        <div className="button-group">
-          <a href="#projects" className="btn btn-primary">
-            <CalendarIcon /> Selected Work
-          </a>
-          <a href={`mailto:${personal.email || 'rslikefoot00@gmail.com'}`} className="btn btn-outline">
-            <MailIcon /> Send an email
-          </a>
-        </div>
-
-        {/* Social Links */}
-        <div className="social-links">
-          {personal.socials && Object.entries(personal.socials).map(([platform, url]) => {
-            const Icon = socialIcons[platform]
-            return (
-              <a key={platform} href={url} target="_blank" rel="noreferrer" className="social-link">
-                {Icon && <Icon />}
-                {platform.charAt(0).toUpperCase() + platform.slice(1)}
-              </a>
-            )
-          })}
-          {personal.resumePdf && (
-            <a href={personal.resumePdf} target="_blank" rel="noreferrer" download className="social-link">
-              <ResumeIcon /> Resume
+      {/* 5. Social Links */}
+      <div className="social-links">
+        {personal.socialLinks && Object.entries(personal.socialLinks).map(([platform, url]) => {
+          const Icon = socialIcons[platform]
+          return (
+            <a 
+              key={platform} 
+              href={url} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="social-link"
+            >
+              {Icon && <Icon />}
+              <span>{platform}</span>
             </a>
-          )}
+          )
+        })}
+      </div>
+
+      {/* 6. RESTORED PRE-PROJECT SECTION: ABOUT & CURRENT FOCUS */}
+      <div className="focus-section">
+        <div className="focus-header">
+          <span className="focus-title">// About & Architecture Focus</span>
+          <span className="focus-tag">Active Systems Exploration</span>
+        </div>
+        <div className="focus-content">
+          <p>
+            I am a backend engineer dedicated to building resilient distributed systems, data processing pipelines, and high-performance services. My core focus centers on designing architectures that remain dependable under extreme scale and volatile workloads.
+          </p>
+          <p>
+            Currently researching low-latency concurrency models, asynchronous execution engines, and distributed storage internals. When not architecting infrastructure, I study distributed systems papers and explore efficient local ML model serving.
+          </p>
         </div>
       </div>
 
-      {/* ── Selected Projects ── */}
-      {projects && projects.length > 0 && (
-        <section className="reveal-on-scroll" id="projects" style={{ marginTop: '2.5rem' }}>
-          <h2 className="section-title">Selected Work</h2>
+      {/* 7. Selected Projects */}
+      <div className="section-header" id="projects">
+        <div className="section-title">
+          <span className="prefix">//</span>
+          <span>Selected Projects</span>
+        </div>
+        <div className="section-divider"></div>
+      </div>
 
-          {/* Featured Project */}
-          {projects[0] && (
-            <div style={{ marginBottom: '1.25rem' }}>
-              <FeaturedCard project={projects[0]} />
+      <div className="projects-grid">
+        {projects.map((project, index) => {
+          const isFeatured = index === 0
+
+          return (
+            <div 
+              key={project.id || index} 
+              className={`project-card ${isFeatured ? 'featured-card' : ''}`}
+              style={isFeatured ? { gridColumn: '1 / -1' } : {}}
+            >
+              <div className="project-top">
+                <div className="project-header">
+                  <span className="project-title">{project.name}</span>
+                  {project.status && (
+                    <span className={`project-status ${
+                      project.status.toLowerCase().includes('live') ? 'status-live' :
+                      project.status.toLowerCase().includes('wip') ? 'status-wip' : 'status-beta'
+                    }`}>
+                      {project.status}
+                    </span>
+                  )}
+                </div>
+
+                <p className="project-desc">{project.description}</p>
+
+                {/* Project Image */}
+                {project.image && (
+                  <div className="project-image" style={{ marginTop: '0.85rem' }}>
+                    <img 
+                      src={project.image} 
+                      alt={project.name} 
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+
+                {/* Featured Highlights */}
+                {isFeatured && project.highlights && (
+                  <div className="featured-highlights">
+                    {project.highlights.slice(0, 4).map((highlight, hIdx) => (
+                      <div key={hIdx} className="highlight-item">
+                        <span className="highlight-bullet">▸</span>
+                        <span>{highlight}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Project Tech & Links */}
+              <div className="project-tech">
+                <div style={{ display: 'flex', gap: '0.65rem', alignItems: 'center', flexWrap: 'wrap' }}>
+                  {project.tech && project.tech.map((techName, tIdx) => {
+                    const TechIcon = TechIcons[techName]
+                    return TechIcon ? (
+                      <span key={tIdx} title={techName} className="tech-icon-link">
+                        <TechIcon />
+                      </span>
+                    ) : (
+                      <span key={tIdx} className="mono" style={{ fontSize: '0.725rem', color: 'var(--muted)' }}>
+                        {techName}
+                      </span>
+                    )
+                  })}
+                </div>
+
+                <div style={{ display: 'flex', gap: '0.85rem', alignItems: 'center' }}>
+                  {project.github && (
+                    <a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="project-link"
+                      title="View GitHub Repository"
+                    >
+                      <GithubIcon />
+                    </a>
+                  )}
+                  {project.link && (
+                    <a 
+                      href={project.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="project-link"
+                      title="View Live Demo / Docs"
+                    >
+                      <ExternalLinkIcon />
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
-          )}
+          )
+        })}
+      </div>
 
-          {/* Other Projects Grid */}
-          <div className="projects-grid">
-            {projects.slice(1).map((proj) => (
-              <ProjectCard key={proj.id || proj.name} project={proj} />
+      {/* 8. Technical Stack & Infrastructure */}
+      {technicalStack && (
+        <>
+          <div className="section-header">
+            <div className="section-title">
+              <span className="prefix">//</span>
+              <span>Technical Craft</span>
+            </div>
+            <div className="section-divider"></div>
+          </div>
+
+          <div className="stack-grid">
+            {Object.entries(technicalStack).map(([category, items]) => (
+              <div key={category} className="stack-card">
+                <span className="stack-title">{category}</span>
+                <div className="stack-tags">
+                  {items.map((tech, idx) => (
+                    <span key={idx} className="stack-pill">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
-        </section>
+        </>
       )}
 
-      {/* ── Technical Stack (Bento Grid) ── */}
-      {stack && (
-        <section className="reveal-on-scroll" style={{ marginTop: '3rem' }}>
-          <h2 className="section-title">Technical Craft & Infrastructure</h2>
-          <div className="bento-grid">
-            {stack.languages && (
-              <div className="bento-card">
-                <span className="bento-title">Languages</span>
-                <div className="bento-tags">
-                  {stack.languages.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {stack.frameworks && (
-              <div className="bento-card">
-                <span className="bento-title">Frameworks & APIs</span>
-                <div className="bento-tags">
-                  {stack.frameworks.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {stack.tools && (
-              <div className="bento-card">
-                <span className="bento-title">Systems & Infrastructure</span>
-                <div className="bento-tags">
-                  {stack.tools.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* ── Writings & Articles ── */}
+      {/* 9. Writings & Articles */}
       {writings && writings.length > 0 && (
-        <section className="reveal-on-scroll" style={{ marginTop: '3rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-            <h2 className="section-title" style={{ margin: 0 }}>Articles & Notes</h2>
-            <Link to="/blog" className="mono" style={{ fontSize: '0.8rem', color: 'var(--accent)' }}>
-              View all →
+        <>
+          <div className="section-header">
+            <div className="section-title">
+              <span className="prefix">//</span>
+              <span>Selected Writings</span>
+            </div>
+            <div className="section-divider"></div>
+            <Link to="/blog" className="mono" style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>
+              view all →
             </Link>
           </div>
+
           <div className="writings-list">
-            {writings.slice(0, 3).map((w, i) => (
-              <a key={i} href={w.link} target="_blank" rel="noreferrer" className="writing-row">
+            {writings.slice(0, 3).map((article, idx) => (
+              <a 
+                key={idx} 
+                href={article.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="writing-row"
+              >
                 <div>
-                  <div className="writing-title">{w.title}</div>
-                  <div className="writing-meta">{w.platform} · {w.date}</div>
+                  <div className="writing-title">{article.title}</div>
+                  <div className="writing-meta">{article.platform} • {article.date}</div>
                 </div>
-                <div className="writing-arrow">→</div>
+                <span className="writing-arrow">→</span>
               </a>
             ))}
           </div>
-        </section>
+        </>
       )}
 
-      {/* ── Engineering Activity (GitHub Contributions) ── */}
-      {github && github.showContributions && github.username && (
-        <section className="reveal-on-scroll" style={{ marginTop: '3rem', marginBottom: '1rem' }}>
-          <h2 className="section-title">Engineering Activity</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden', padding: '1rem 0' }}>
-            <div style={{ width: 'max-content' }}>
-              <GitHubCalendar 
-                username={github.username} 
-                transformData={selectLast10Months}
-                colorScheme="dark"
-                theme={{
-                  light: ['#18181f', '#27272a', '#3f3f46', '#f59e0b', '#fbbf24'],
-                  dark: ['#131317', '#27272a', '#3f3f46', '#d97706', '#f59e0b'],
-                }}
-                fontSize={12}
-                blockSize={12}
-                renderBlock={(block, activity) => 
-                  React.cloneElement(block, {
-                    'data-tooltip-id': 'react-tooltip',
-                    'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
-                  })
-                }
-              />
-              <Tooltip id="react-tooltip" />
-            </div>
-          </div>
-        </section>
-      )}
-    </main>
+      {/* 10. Engineering Activity (GitHub Contributions) */}
+      <div className="section-header">
+        <div className="section-title">
+          <span className="prefix">//</span>
+          <span>GitHub Activity</span>
+        </div>
+        <div className="section-divider"></div>
+      </div>
+
+      <div style={{ 
+        background: 'var(--surface)', 
+        border: '1px solid var(--border)', 
+        borderRadius: 'var(--radius-sm)', 
+        padding: '1.25rem',
+        overflowX: 'auto' 
+      }}>
+        <GitHubCalendar
+          username={personal.githubUsername || 'RudreshSingh'}
+          colorScheme="dark"
+          theme={{
+            dark: ['#16161b', '#1e293b', '#334155', '#475569', '#6366f1']
+          }}
+          fontSize={12}
+          blockSize={11}
+          blockMargin={4}
+          renderBlock={(block, activity) =>
+            React.cloneElement(block, {
+              'data-tooltip-id': 'react-tooltip',
+              'data-tooltip-html': `${activity.count} contributions on ${activity.date}`
+            })
+          }
+        />
+        <Tooltip id="react-tooltip" />
+      </div>
+    </div>
   )
 }

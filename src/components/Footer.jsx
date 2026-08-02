@@ -5,27 +5,22 @@ export default function Footer({ personal }) {
     <footer className="footer-wrapper">
       <div className="footer-content">
         <div className="footer-top">
-          <div>
-            <div className="footer-brand">
-              <span>rudresh</span>
-              <span style={{ color: 'var(--accent)' }}>.</span>
-            </div>
-            <p className="footer-quote">
-              &ldquo;Keep moving forward, Dr. Senku.&rdquo;
-            </p>
+          <div className="footer-brand">
+            <span>rudresh</span>
+            <span style={{ color: 'var(--accent-muted)' }}>/</span>
           </div>
 
           <div className="footer-socials">
-            {personal?.socials && Object.entries(personal.socials).map(([platform, url]) => {
+            {personal?.socialLinks && Object.entries(personal.socialLinks).map(([platform, url]) => {
               const Icon = socialIcons[platform]
               return (
                 <a 
                   key={platform} 
                   href={url} 
                   target="_blank" 
-                  rel="noreferrer" 
-                  aria-label={platform} 
+                  rel="noopener noreferrer" 
                   className="footer-social-icon"
+                  title={platform}
                 >
                   {Icon && <Icon />}
                 </a>
@@ -35,8 +30,8 @@ export default function Footer({ personal }) {
         </div>
 
         <div className="footer-bottom">
-          <span>{personal?.name || 'Rudresh Singh'}</span>
-          <span>© {new Date().getFullYear()} · All rights reserved</span>
+          <span>Keep moving forward, Dr. Senku.</span>
+          <span>© {new Date().getFullYear()} {personal?.name || 'Rudresh Singh'}</span>
         </div>
       </div>
     </footer>

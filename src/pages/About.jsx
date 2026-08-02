@@ -1,113 +1,133 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import { GitHubCalendar } from 'react-github-calendar'
 import { Tooltip } from 'react-tooltip'
-import { initScrollObserver } from '../lib/animations'
 
 export default function About({ data }) {
-  const { personal, github, stack } = data
-  const mainRef = useRef(null)
-
-  useEffect(() => {
-    if (!mainRef.current) return
-    const cleanup = initScrollObserver(mainRef.current)
-    return cleanup
-  }, [])
-
-  const selectLast10Months = contributions => {
-    const currentYear = new Date().getFullYear()
-    const currentMonth = new Date().getMonth()
-    const shownMonths = 10
-    return contributions.filter(day => {
-      const date = new Date(day.date)
-      const monthDiff = currentMonth - date.getMonth() + 12 * (currentYear - date.getFullYear())
-      return monthDiff < shownMonths
-    })
-  }
+  const { personal, technicalStack, openSource } = data
 
   return (
-    <main ref={mainRef} className="container" style={{ paddingBottom: '3rem', paddingTop: '1.5rem' }}>
-      <div>
-        <h1 style={{ fontSize: '2rem', marginBottom: '1.25rem' }}>About Me</h1>
+    <div className="container" style={{ paddingTop: '2rem' }}>
+      <div className="section-header" style={{ marginTop: 0 }}>
+        <div className="section-title">
+          <span className="prefix">//</span>
+          <span>About & Engineering Philosophy</span>
+        </div>
+        <div className="section-divider"></div>
       </div>
 
-      {/* Bio Paragraphs */}
-      <section style={{ marginBottom: '2.5rem' }}>
-        {personal.about && personal.about.map((paragraph, idx) => (
-          <p key={idx} style={{ fontSize: '1rem', color: 'var(--muted-light)', lineHeight: 1.75, marginBottom: '1.25rem' }}>
-            {paragraph}
-          </p>
-        ))}
-      </section>
+      <div style={{ 
+        background: 'var(--surface)', 
+        border: '1px solid var(--border)', 
+        borderRadius: 'var(--radius-sm)', 
+        padding: '1.5rem',
+        marginBottom: '2rem' 
+      }}>
+        <p style={{ color: 'var(--fg)', fontSize: '1rem', marginBottom: '1rem', lineHeight: 1.75 }}>
+          {personal.bio}
+        </p>
+        <p style={{ color: 'var(--muted-light)', fontSize: '0.925rem', lineHeight: 1.75, marginBottom: '0.75rem' }}>
+          I specialize in building fault-tolerant backend infrastructure, low-latency microservices, and distributed data systems. I believe in writing readable, maintainable code backed by rigorous telemetry and empirical benchmarks.
+        </p>
+        <p style={{ color: 'var(--muted)', fontSize: '0.875rem', lineHeight: 1.7 }}>
+          My development philosophy draws heavily on principles of modularity, deterministic execution, and continuous optimization.
+        </p>
+      </div>
 
-      {/* Technical Stack (Bento Grid) */}
-      {stack && (
-        <section className="reveal-on-scroll" style={{ marginBottom: '3rem' }}>
-          <h2 className="section-title">Technical Craft & Stack</h2>
-          <div className="bento-grid" style={{ marginTop: '1rem' }}>
-            {stack.languages && (
-              <div className="bento-card">
-                <span className="bento-title">Languages</span>
-                <div className="bento-tags">
-                  {stack.languages.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {stack.frameworks && (
-              <div className="bento-card">
-                <span className="bento-title">Frameworks & APIs</span>
-                <div className="bento-tags">
-                  {stack.frameworks.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {stack.tools && (
-              <div className="bento-card">
-                <span className="bento-title">Systems & Infrastructure</span>
-                <div className="bento-tags">
-                  {stack.tools.map((item, i) => (
-                    <span key={i} className="bento-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-            )}
+      {/* Technical Stack */}
+      {technicalStack && (
+        <>
+          <div className="section-header">
+            <div className="section-title">
+              <span className="prefix">//</span>
+              <span>Technical Craft</span>
+            </div>
+            <div className="section-divider"></div>
           </div>
-        </section>
+
+          <div className="stack-grid" style={{ marginBottom: '2rem' }}>
+            {Object.entries(technicalStack).map(([category, items]) => (
+              <div key={category} className="stack-card">
+                <span className="stack-title">{category}</span>
+                <div className="stack-tags">
+                  {items.map((tech, idx) => (
+                    <span key={idx} className="stack-pill">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
       )}
 
       {/* Open Source Contributions */}
-      {github && github.showContributions && github.username && (
-        <section className="reveal-on-scroll" style={{ marginBottom: '2.5rem' }}>
-          <h2 className="section-title">Open Source Contributions</h2>
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%', overflow: 'hidden', padding: '1rem 0' }}>
-            <div style={{ width: 'max-content' }}>
-              <GitHubCalendar 
-                username={github.username} 
-                transformData={selectLast10Months}
-                colorScheme="dark"
-                theme={{
-                  light: ['#18181f', '#27272a', '#3f3f46', '#f59e0b', '#fbbf24'],
-                  dark: ['#131317', '#27272a', '#3f3f46', '#d97706', '#f59e0b'],
-                }}
-                fontSize={12}
-                blockSize={12}
-                renderBlock={(block, activity) => 
-                  React.cloneElement(block, {
-                    'data-tooltip-id': 'react-tooltip',
-                    'data-tooltip-content': `${activity.count} contributions on ${activity.date}`,
-                  })
-                }
-              />
-              <Tooltip id="react-tooltip" />
+      {openSource && openSource.length > 0 && (
+        <>
+          <div className="section-header">
+            <div className="section-title">
+              <span className="prefix">//</span>
+              <span>Open Source Contributions</span>
             </div>
+            <div className="section-divider"></div>
           </div>
-        </section>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
+            {openSource.map((item, idx) => (
+              <div 
+                key={idx} 
+                style={{ 
+                  background: 'var(--surface)', 
+                  border: '1px solid var(--border)', 
+                  borderRadius: 'var(--radius-sm)', 
+                  padding: '1.15rem' 
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                  <span style={{ fontWeight: 600, color: 'var(--fg)', fontSize: '0.95rem' }}>{item.org}</span>
+                  <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--muted)' }}>{item.role}</span>
+                </div>
+                <p style={{ color: 'var(--muted-light)', fontSize: '0.85rem', lineHeight: 1.6 }}>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </>
       )}
-    </main>
+
+      {/* GitHub Calendar */}
+      <div className="section-header">
+        <div className="section-title">
+          <span className="prefix">//</span>
+          <span>Contribution Activity</span>
+        </div>
+        <div className="section-divider"></div>
+      </div>
+
+      <div style={{ 
+        background: 'var(--surface)', 
+        border: '1px solid var(--border)', 
+        borderRadius: 'var(--radius-sm)', 
+        padding: '1.25rem',
+        overflowX: 'auto' 
+      }}>
+        <GitHubCalendar
+          username={personal.githubUsername || 'RudreshSingh'}
+          colorScheme="dark"
+          theme={{
+            dark: ['#16161b', '#1e293b', '#334155', '#475569', '#6366f1']
+          }}
+          fontSize={12}
+          blockSize={11}
+          blockMargin={4}
+          renderBlock={(block, activity) =>
+            React.cloneElement(block, {
+              'data-tooltip-id': 'react-tooltip',
+              'data-tooltip-html': `${activity.count} contributions on ${activity.date}`
+            })
+          }
+        />
+        <Tooltip id="react-tooltip" />
+      </div>
+    </div>
   )
 }

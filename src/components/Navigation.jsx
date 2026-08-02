@@ -6,17 +6,17 @@ export default function Navigation() {
       <header className="header">
         <Link to="/" className="brand-mark" aria-label="Home">
           <span>rudresh</span>
-          <span className="brand-dot"></span>
+          <span className="brand-dot">/</span>
         </Link>
         <nav className="nav-links">
           <NavLink to="/" end className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            Home
+            // home
           </NavLink>
           <NavLink to="/about" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            About
+            // about
           </NavLink>
           <NavLink to="/blog" className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}>
-            Blog
+            // blog
           </NavLink>
         </nav>
       </header>
