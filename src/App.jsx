@@ -5,6 +5,7 @@ import './index.css'
 
 import Navigation from './components/Navigation'
 import Footer from './components/Footer'
+import VintageCursorTrail from './components/VintageCursorTrail'
 import Home from './pages/Home'
 import About from './pages/About'
 import Blog from './pages/Blog'
@@ -26,7 +27,8 @@ function App() {
 
   return (
     <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}>
+        <VintageCursorTrail />
         <Navigation />
         
         <div style={{ flex: 1 }}>

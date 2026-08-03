@@ -87,31 +87,168 @@ import {
   SiCplusplus,
   SiFastapi,
   SiGit,
-  SiLinux
+  SiLinux,
+  SiGo,
+  SiDeepseek,
+  SiTensorflow,
+  SiPytorch,
+  SiScikitlearn,
+  SiGnubash
 } from 'react-icons/si'
 
-import { FaAws, FaDatabase } from 'react-icons/fa'
+import {
+  FaAws,
+  FaDatabase,
+  FaNetworkWired,
+  FaWindows,
+  FaBrain,
+  FaMicrochip,
+  FaServer
+} from 'react-icons/fa6'
 
-export const TechIcons = {
-  'JavaScript': SiJavascript,
-  'TypeScript': SiTypescript,
-  'Python': SiPython,
-  'SQL': FaDatabase,
+import {
+  LuBrainCircuit,
+  LuCpu,
+  LuServerCog,
+  LuTerminal,
+  LuSparkles,
+  LuLayers,
+  LuLayers3,
+  LuDatabase,
+  LuSplit,
+  LuNetwork,
+  LuWorkflow
+} from 'react-icons/lu'
+
+import {
+  TbTopologyComplex,
+  TbBrain,
+  TbMap
+} from 'react-icons/tb'
+
+import { HiQueueList } from 'react-icons/hi2'
+
+const rawTechIcons = {
+  // Languages
   'C++': SiCplusplus,
-  'React': SiReact,
+  'cpp': SiCplusplus,
+  'c++': SiCplusplus,
+  'JavaScript': SiJavascript,
+  'JS': SiJavascript,
+  'TypeScript': SiTypescript,
+  'TS': SiTypescript,
+  'Python': SiPython,
+  'Go': SiGo,
+  'Golang': SiGo,
+  'SQL': FaDatabase,
+
+  // Backend
   'Node.js': SiNodedotjs,
+  'Nodejs': SiNodedotjs,
+  'Node': SiNodedotjs,
   'Express': SiExpress,
+  'Express.js': SiExpress,
   'FastAPI': SiFastapi,
-  'Docker': SiDocker,
-  'AWS': FaAws,
   'PostgreSQL': SiPostgresql,
+  'Postgres': SiPostgresql,
   'Redis': SiRedis,
+  'BullMQ': SiRedis,
+  'Bull': SiRedis,
+
+  // Frontend
+  'React': SiReact,
+  'React.js': SiReact,
+  'Vite': SiVite,
+  'Chrome Extension': SiGooglechrome,
+  'Google Chrome': SiGooglechrome,
+  'Chrome': SiGooglechrome,
+
+  // Infrastructure & Tools
+  'Docker': SiDocker,
+  'Docker Compose': SiDocker,
+  'AWS': FaAws,
+  'Nginx': SiNginx,
+  'Linux': SiLinux,
+  'Bash': SiGnubash,
   'Git': SiGit,
   'Playwright': PlaywrightIcon,
-  'BullMQ': SiRedis,
-  'Nginx': SiNginx,
-  'Google Chrome': SiGooglechrome,
-  'Vite': SiVite,
-  'Linux': SiLinux
+  'dbmate': LuDatabase,
+
+  // AI & Advanced Systems (Currently Exploring)
+  'Deep Learning': LuBrainCircuit,
+  'Neural Networks': TbBrain,
+  'Neural Network': TbBrain,
+  'Machine Learning': SiScikitlearn,
+  'Machine Learning Systems': LuCpu,
+  'AI Infrastructure': LuServerCog,
+  'Distributed Systems': TbTopologyComplex,
+  'OpenRouter': LuSparkles,
+  'DeepSeek': SiDeepseek,
+
+  // Networking, Concurrency & Low-Level Projects
+  'TCP/IP': FaNetworkWired,
+  'TCP': FaNetworkWired,
+  'IP': FaNetworkWired,
+  'Winsock': FaWindows,
+  'POSIX Sockets': LuTerminal,
+  'POSIX': LuTerminal,
+  'Sockets': LuTerminal,
+  'Multithreading': LuCpu,
+  'Concurrency': LuSplit,
+  'GeoJSON': TbMap
 }
+
+// Normalized index for robust fuzzy matching (lowercase, alphanumeric only)
+const normalizeKey = (k) => String(k || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+
+const normalizedIconMap = new Map()
+Object.entries(rawTechIcons).forEach(([key, icon]) => {
+  normalizedIconMap.set(normalizeKey(key), icon)
+  normalizedIconMap.set(key.toLowerCase(), icon)
+})
+
+// Specific aliases for common variations
+normalizedIconMap.set('tcpip', FaNetworkWired)
+normalizedIconMap.set('posixsockets', LuTerminal)
+normalizedIconMap.set('posix', LuTerminal)
+normalizedIconMap.set('c', SiCplusplus)
+normalizedIconMap.set('cpp', SiCplusplus)
+normalizedIconMap.set('cplusplus', SiCplusplus)
+normalizedIconMap.set('neuralnetworks', TbBrain)
+normalizedIconMap.set('neuralnetwork', TbBrain)
+normalizedIconMap.set('deeplearning', LuBrainCircuit)
+normalizedIconMap.set('machinelearningsystems', LuCpu)
+normalizedIconMap.set('aiinfrastructure', LuServerCog)
+normalizedIconMap.set('distributedsystems', TbTopologyComplex)
+
+export const TechIcons = new Proxy(rawTechIcons, {
+  get(target, prop) {
+    if (typeof prop !== 'string') return target[prop]
+    if (prop in target) return target[prop]
+    
+    // Normalized lookup
+    const norm = normalizeKey(prop)
+    if (normalizedIconMap.has(norm)) {
+      return normalizedIconMap.get(norm)
+    }
+    
+    const lower = prop.toLowerCase()
+    if (normalizedIconMap.has(lower)) {
+      return normalizedIconMap.get(lower)
+    }
+
+    // Keyword heuristics fallback
+    if (lower.includes('net') || lower.includes('tcp') || lower.includes('ip')) return FaNetworkWired
+    if (lower.includes('brain') || lower.includes('neural') || lower.includes('ai')) return LuBrainCircuit
+    if (lower.includes('learn') || lower.includes('ml')) return LuCpu
+    if (lower.includes('sock') || lower.includes('win')) return FaWindows
+    if (lower.includes('thread') || lower.includes('cpu')) return LuCpu
+    if (lower.includes('data') || lower.includes('db')) return LuDatabase
+    if (lower.includes('distrib') || lower.includes('cluster')) return TbTopologyComplex
+
+    // Graceful default icon for any unlisted technical skill
+    return LuWorkflow
+  }
+})
+
 

@@ -462,14 +462,14 @@ export default function Home({ data }) {
               </div>
             )}
 
-            {stack.frameworks && (
+            {stack.backend && (
               <div className="tech-category-card">
                 <div className="tech-category-header">
-                  <span className="tech-category-title">02 / Frameworks & Systems</span>
-                  <span className="tech-category-count">{stack.frameworks.length} technologies</span>
+                  <span className="tech-category-title">02 / Backend & Database</span>
+                  <span className="tech-category-count">{stack.backend.length} technologies</span>
                 </div>
                 <div className="tech-chips-grid">
-                  {stack.frameworks.map((item, i) => {
+                  {stack.backend.map((item, i) => {
                     const Icon = TechIcons[item]
                     return (
                       <div key={i} className="tech-chip">
@@ -482,10 +482,29 @@ export default function Home({ data }) {
               </div>
             )}
 
+             {stack.infrastructure && (
+              <div className="tech-category-card">
+                <div className="tech-category-header">
+                  <span className="tech-category-title">03 / Infrastructure</span>
+                  <span className="tech-category-count">{stack.infrastructure.length} technologies</span>
+                </div>
+                <div className="tech-chips-grid">
+                  {stack.infrastructure.map((item, i) => {
+                    const Icon = TechIcons[item]
+                    return (
+                      <div key={i} className="tech-chip">
+                        {Icon && <Icon />}
+                        <span>{item}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
             {stack.tools && (
               <div className="tech-category-card">
                 <div className="tech-category-header">
-                  <span className="tech-category-title">03 / Infrastructure & Data</span>
+                  <span className="tech-category-title">04 / Tools & Testing</span>
                   <span className="tech-category-count">{stack.tools.length} technologies</span>
                 </div>
                 <div className="tech-chips-grid">
@@ -501,6 +520,47 @@ export default function Home({ data }) {
                 </div>
               </div>
             )}
+
+            {stack.frontend && (
+              <div className="tech-category-card">
+                <div className="tech-category-header">
+                  <span className="tech-category-title">05 / Frontend</span>
+                  <span className="tech-category-count">{stack.frontend.length} technologies</span>
+                </div>
+                <div className="tech-chips-grid">
+                  {stack.frontend.map((item, i) => {
+                    const Icon = TechIcons[item]
+                    return (
+                      <div key={i} className="tech-chip">
+                        {Icon && <Icon />}
+                        <span>{item}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+
+            {stack.currentlyExploring && (
+              <div className="tech-category-card">
+                <div className="tech-category-header">
+                  <span className="tech-category-title">06 / Currently Exploring & Interests</span>
+                  <span className="tech-category-count">{stack.currentlyExploring.length} technologies</span>
+                </div>
+                <div className="tech-chips-grid">
+                  {stack.currentlyExploring.map((item, i) => {
+                    const Icon = TechIcons[item]
+                    return (
+                      <div key={i} className="tech-chip">
+                        {Icon && <Icon />}
+                        <span>{item}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+           
           </div>
         </section>
       )}

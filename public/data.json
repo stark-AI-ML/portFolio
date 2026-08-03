@@ -8,16 +8,18 @@
       "/anime_banner.png"
     ],
     "bio": [
-      "Building high-performance APIs, distributed systems, and data pipelines.",
-      "Specializing in Node.js, PostgreSQL, Redis, Docker, and AWS infrastructure.",
-      "Currently exploring Deep Learning and scalable ML systems."
+      "Building high-performance APIs, distributed systems, and data-intensive applications.",
+      "Working primarily with Node.js, PostgreSQL, Redis, Docker, AWS, and systems-level C++.",
+      "Currently exploring Deep Learning, AI systems, and the engineering behind scalable ML infrastructure."
     ],
     "about": [
-      "I believe projects teach more than notebooks ever could. Every idea is an opportunity to learn something new — whether it's a different tech stack, architecture pattern, or way of thinking. I enjoy building things from scratch, experimenting, breaking them, fixing them, and learning along the way.",
-      "My biggest strength isn't a specific framework or language — it's adaptability. I'm comfortable moving across technologies, learning what's needed, and turning new ideas into working products. For me, growth comes from building, shipping, and repeating the process."
+      "I like architecting things, designing systems, and connecting patterns between technologies and domains that don't initially seem related.",
+      "My biggest strength isn't a specific framework or language — it's adaptability. I'm comfortable moving across technologies, learning what's necessary, and turning unfamiliar ideas into working systems.",
+      "I learn best by building. Whether it's a backend service, distributed pipeline, data system, or machine learning model, I prefer understanding what happens underneath the abstraction rather than simply using the abstraction.",
+      "For me, growth comes from building, breaking, understanding, shipping, and repeating the process."
     ],
     "profileViews": 5,
-    "email": "rslikefoot00@gmail.com",
+    "email": "[rslikefoot00@gmail.com](mailto:rslikefoot00@gmail.com)",
     "socials": {
       "github": "https://github.com/stark-AI-ML",
       "linkedin": "https://www.linkedin.com/in/rudresh-singh-a28967241/",
@@ -31,24 +33,24 @@
   },
   "experience": [
     {
-      "company": "Open Source & Systems Engineering",
+      "company": "Open Source & EduLinkUP Organisation",
       "role": "Backend & Distributed Systems Contributor",
       "period": "2024 — Present",
       "location": "Remote",
       "type": "Engineering",
-      "description": "Architecting high-throughput data scraping engines, caching layers with Redis, partitioned PostgreSQL schemas, and Dockerized microservices.",
+      "description": "Contributing to open-source engineering projects with a focus on backend development, APIs, distributed systems, and practical software engineering.",
       "url": "https://github.com/stark-AI-ML"
     }
   ],
   "writings": [
     {
-      "title": "Bash Tutorial for starters",
+      "title": "Bash Tutorial for Starters",
       "date": "Nov 2024",
       "link": "https://bash-rudresh.hashnode.dev/bash-starter",
       "platform": "Hashnode"
     },
     {
-      "title": "Bash Tutorial for Mid to ADV",
+      "title": "Bash Tutorial for Mid to Advanced Users",
       "date": "Nov 2024",
       "link": "https://bash-rudresh.hashnode.dev/bashmidadv",
       "platform": "Hashnode"
@@ -61,16 +63,27 @@
       "status": "Live",
       "link": "https://github.com/stark-AI-ML/BodhAPI",
       "image": "./bodhDocs.png",
-      "tech": ["Node.js", "Express", "PostgreSQL", "Redis", "Docker", "AWS", "Nginx"],
-      "description": "High-throughput Indian News Intelligence Engine — scraper, API, and analytics platform deployed on AWS with Docker.",
+      "tech": [
+        "Node.js",
+        "Express",
+        "PostgreSQL",
+        "Redis",
+        "BullMQ",
+        "Playwright",
+        "Docker",
+        "AWS",
+        "Nginx"
+      ],
+      "description": "High-throughput Indian News Intelligence Engine combining automated data ingestion, transcript scraping, analytics, caching, and a production REST API deployed on AWS.",
       "highlights": [
-        "Reduced query latency from 300ms to <20ms with Redis TTL caching",
-        "Advanced PostgreSQL indexing: GIN, BRIN, JSONB, Full-Text Search on partitioned tables",
-        "Custom Redis Lua-script rate limiter (Token Bucket: per-minute + daily quotas)",
-        "Docker internal network (shared_private_net) isolating Postgres/Redis from public access",
-        "Nginx reverse proxy for IP-based rate limiting on sensitive routes",
-        "Playwright + BullMQ data ingestion pipeline for autonomous transcript scraping",
-        "dbmate automated schema migrations in Docker Compose lifecycle"
+        "Reduced API query latency from roughly 1–2 seconds to under 80ms using Redis TTL caching and optimized database access",
+        "Designed PostgreSQL data access using GIN, BRIN, JSONB, and Full-Text Search across partitioned datasets",
+        "Built a custom Redis Lua-script Token Bucket rate limiter supporting per-minute and daily API quotas",
+        "Designed a Docker internal network isolating PostgreSQL and Redis from public access",
+        "Configured Nginx as a reverse proxy with IP-based rate limiting for sensitive endpoints",
+        "Built an autonomous ingestion pipeline using Playwright and BullMQ for scheduled transcript scraping and processing",
+        "Integrated dbmate migrations into the Docker Compose application lifecycle",
+        "Designed the system around constrained AWS infrastructure with explicit memory and service-isolation considerations"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/BodhAPI",
@@ -83,12 +96,20 @@
       "status": "Beta",
       "link": "https://github.com/stark-AI-ML/saraanshV0.1",
       "image": "./saraansh.png",
-      "tech": ["Google Chrome", "Vite", "React"],
-      "description": "AI-powered Chrome Extension for instant web content summarization and PDF export using Deepseek models.",
+      "tech": [
+        "JavaScript",
+        "React",
+        "Vite",
+        "Chrome Extension",
+        "OpenRouter",
+        "DeepSeek"
+      ],
+      "description": "AI-powered Chrome Extension for instantly summarizing web content and exporting generated summaries as PDFs.",
       "highlights": [
-        "OpenRouter AI integration with Deepseek-chat-v3 for real-time content processing",
-        "Browser-native PDF generation pipeline via html2pdf.js",
-        "Built with CRXJS Vite Plugin for modern Chrome Extension development"
+        "Integrated OpenRouter with DeepSeek models for real-time AI-powered content summarization",
+        "Built a browser-native PDF generation pipeline using html2pdf.js",
+        "Developed the extension using Vite and CRXJS for a modern Chrome Extension workflow",
+        "Designed the application around direct browser-based content extraction and processing"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/saraanshV0.1",
@@ -101,12 +122,19 @@
       "status": "WIP",
       "link": "https://github.com/stark-AI-ML/niriksana1.0",
       "image": "./niriksana_garudah.png",
-      "tech": ["React", "Vite", "Node.js", "Express"],
-      "description": "Full-stack Indian data visualization platform — GDP, demographics, and geographic data rendered on interactive maps.",
+      "tech": [
+        "React",
+        "Vite",
+        "Node.js",
+        "Express",
+        "GeoJSON"
+      ],
+      "description": "Full-stack Indian data visualization platform for exploring geographic, demographic, and economic datasets through interactive maps and visualizations.",
       "highlights": [
-        "garudah-backend: Node.js service for processing massive GDP and demographic datasets",
-        "IndiaGeoVector GeoJSON integration for state-level geographic rendering",
-        "Data pipeline for religion and economic statistics insertion"
+        "Built Garudah, a Node.js backend service for processing large GDP and demographic datasets",
+        "Integrated IndiaGeoVector GeoJSON data for state-level geographic visualization",
+        "Designed data pipelines for inserting and transforming economic and demographic statistics",
+        "Built an interactive React-based visualization layer for exploring structured Indian datasets"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/niriksana1.0"
@@ -118,12 +146,20 @@
       "status": "Active",
       "link": "https://github.com/stark-AI-ML/Server-Client-Chat-server-",
       "image": "./client_server.png",
-      "tech": ["Node.js", "Express", "Vite"],
-      "description": "High-concurrency multi-threaded TCP chat server built with C++ and Winsock / POSIX sockets.",
+      "tech": [
+        "C++",
+        "TCP/IP",
+        "Winsock",
+        "POSIX Sockets",
+        "Multithreading"
+      ],
+      "description": "Low-level concurrent TCP chat server built from the socket layer to understand networking, concurrency, and client-server communication without relying on high-level networking frameworks.",
       "highlights": [
-        "Engineered multi-threaded TCP socket communication architecture with C++ & Winsock API",
-        "Implemented non-blocking event polling for concurrent client socket connections",
-        "Built custom packet serialization protocol for real-time low-latency messaging"
+        "Implemented concurrent TCP socket communication using C++ with Winsock and POSIX socket concepts",
+        "Worked with multithreaded client-server communication and concurrent connection handling",
+        "Implemented non-blocking event polling for managing multiple socket connections",
+        "Built a custom packet serialization protocol for structured real-time messaging",
+        "Used the project to explore networking fundamentals, concurrency, and systems-level backend engineering"
       ],
       "links": {
         "github": "https://github.com/stark-AI-ML/Server-Client-Chat-server-"
@@ -131,8 +167,43 @@
     }
   ],
   "stack": {
-    "languages": ["C++","JavaScript", "TypeScript", "Go","Python", "SQL"],
-    "frameworks": ["React", "Node.js", "Express", "FastAPI"],
-    "tools": ["Docker", "AWS", "PostgreSQL", "Redis", "Git", "Playwright", "BullMQ", "Nginx"]
+    "languages": [
+      "C++",
+      "JavaScript",
+      "TypeScript",
+      "Go",
+      "Python",
+      "SQL"
+    ],
+    "backend": [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Redis",
+      "BullMQ"
+    ],
+    "frontend": [
+      "React",
+      "Vite"
+    ],
+    "infrastructure": [
+      "Docker",
+      "Docker Compose",
+      "AWS",
+      "Nginx",
+      "Linux"
+    ],
+    "tools": [
+      "Git",
+      "Playwright",
+      "dbmate"
+    ],
+    "currentlyExploring": [
+      "Deep Learning",
+      "Neural Networks",
+      "Machine Learning Systems",
+      "AI Infrastructure",
+      "Distributed Systems"
+    ]
   }
 }
