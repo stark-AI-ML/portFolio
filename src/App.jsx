@@ -19,6 +19,10 @@ function App() {
       .then(d => {
         setData(d)
         if (d.tracker) initTracker(d.tracker)
+        if (d.personal?.avatar) {
+          const link = document.querySelector("link[rel~='icon']")
+          if (link) link.href = d.personal.avatar
+        }
       })
       .catch(console.error)
   }, [])

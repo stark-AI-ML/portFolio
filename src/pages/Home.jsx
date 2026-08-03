@@ -309,9 +309,9 @@ export default function Home({ data }) {
 
   return (
     <main className="container">
-      {/* ── 1. Hero Banner with animation1.mp4 Video & Smooth Image Placeholder Fallback ── */}
+      {/* ── 1. Hero Banner with animation3.mp4 Video & Smooth Image Placeholder Fallback ── */}
       <div className="hero-banner">
-        <div className="hero-banner-inner">
+        <div className={`hero-banner-inner ${isVideoLoaded ? 'video-active' : ''}`}>
           {/* Static image placeholder rendered immediately */}
           {currentBanner && (
             <img

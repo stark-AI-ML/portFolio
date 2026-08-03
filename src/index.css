@@ -287,6 +287,16 @@ h1, h2, h3, h4 {
   animation: cosmicDrift 28s ease-in-out infinite alternate;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transition: inset 0.6s ease, width 0.6s ease, height 0.6s ease;
+}
+
+/* In video mode, disable drifting animation so video plays natively without double-motion */
+.hero-banner-inner.video-active {
+  animation: none !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
 }
 
 .hero-banner-inner .hero-banner-media {
