@@ -176,6 +176,10 @@ export default function Home({ data }) {
   const { personal, projects, github, writings, experience, stack } = data || {}
 
   const [currentBanner, setCurrentBanner] = useState(null)
+  const defaultVideoPath = personal?.bannerVideo || '/animation3.mp4'
+  const [videoSrc, setVideoSrc] = useState(defaultVideoPath)
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+  const videoRef = useRef(null)
   const hasTrackedRef = useRef(false)
   const [profileViews, setProfileViews] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -184,6 +188,50 @@ export default function Home({ data }) {
     }
     return personal?.profileViews || 142
   })
+
+  // Cache banner video (animation3.mp4) in CacheStorage / Blob to guarantee instant zero-latency playback
+  useEffect(() => {
+    let objectUrl = null
+    let isMounted = true
+
+    const cacheAndLoadVideo = async () => {
+      const videoPath = personal?.bannerVideo || '/animation3.mp4'
+      if (typeof window === 'undefined' || !('caches' in window)) {
+        return
+      }
+
+      try {
+        const cache = await caches.open('portfolio-video-cache-v1')
+        let cachedResponse = await cache.match(videoPath)
+
+        if (!cachedResponse) {
+          // Fetch and store in CacheStorage
+          const response = await fetch(videoPath)
+          if (response.ok) {
+            await cache.put(videoPath, response.clone())
+            cachedResponse = response
+          }
+        }
+
+        if (cachedResponse && isMounted) {
+          const blob = await cachedResponse.blob()
+          objectUrl = URL.createObjectURL(blob)
+          setVideoSrc(objectUrl)
+        }
+      } catch (err) {
+        // Silently fallback to default '/animation1.mp4' path
+      }
+    }
+
+    cacheAndLoadVideo()
+
+    return () => {
+      isMounted = false
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (personal.bannerImages && personal.bannerImages.length > 0) {
@@ -261,10 +309,31 @@ export default function Home({ data }) {
 
   return (
     <main className="container">
-      {/* ── 1. Hero Banner with Smooth Wandering Space & Multi-Layered Comets ── */}
+      {/* ── 1. Hero Banner with animation1.mp4 Video & Smooth Image Placeholder Fallback ── */}
       <div className="hero-banner">
         <div className="hero-banner-inner">
-          {currentBanner && <img src={currentBanner} alt="Hero Banner" />}
+          {/* Static image placeholder rendered immediately */}
+          {currentBanner && (
+            <img
+              src={currentBanner}
+              alt="Hero Banner Placeholder"
+              className={`hero-banner-media hero-banner-img ${isVideoLoaded ? 'is-faded' : 'is-visible'}`}
+            />
+          )}
+
+          {/* Video Banner with progressive fade-in */}
+          <video
+            ref={videoRef}
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            onCanPlayThrough={() => setIsVideoLoaded(true)}
+            onLoadedData={() => setIsVideoLoaded(true)}
+            className={`hero-banner-media hero-banner-video ${isVideoLoaded ? 'is-visible' : 'is-faded'}`}
+          />
         </div>
 
         {/* Ambient Multi-Layered Comets */}
