@@ -8,7 +8,7 @@ export default function Footer({ personal }) {
           <span className="footer-brand">
             rs<span className="brand-dot">.</span>
           </span>
-          <span className="footer-tagline">"Keep moving forward, Dr. Senku."</span>
+          <span className="footer-tagline">"Once you meet someone, you never really forget them."</span>
           <span className="footer-copyright">
             © {new Date().getFullYear()} {personal?.name || 'Rudresh Singh'}. All rights reserved.
           </span>

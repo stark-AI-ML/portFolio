@@ -1,50 +1,50 @@
 /* ============================================================
-   PORTFOLIO DESIGN SYSTEM — GitHub & Deep-Tech Dark V3
-   Clean Modern Developer Aesthetic · Inter & JetBrains Mono
-   Wandering Space Canvas · Seamless Borderless Banner Fade
+   PORTFOLIO DESIGN SYSTEM — Studio Ghibli Twilight V4
+   Spirited Away Bathhouse Aesthetic · Inter & JetBrains Mono
+   Spirit Fireflies · Ethereal Ghibli Atmosphere
    ============================================================ */
 
 /* ─── CSS Custom Properties ─── */
 :root {
-  /* GitHub & Deep-Tech Dark Palette */
-  --bg:             #08090a;       /* Deep clean black */
-  --surface:        #0f1115;       /* Elevated dark surface */
-  --surface-hover:  #161920;       /* Surface hover */
-  --surface-2:      #1c2128;       /* Elevated tags & panels */
+  /* Studio Ghibli Twilight & Spirit Teal Palette */
+  --bg:             #090d16;       /* Deep twilight navy */
+  --surface:        #0f1624;       /* Velvety midnight navy surface */
+  --surface-hover:  #172033;       /* Spirit slate hover */
+  --surface-2:      #1a2438;       /* Elevated panel slate */
   
-  --border:         #21262d;       /* GitHub dark border */
-  --border-light:   #30363d;       /* Light border */
-  --border-active:  #484f58;       /* Active border */
+  --border:         #1d293d;       /* Soft navy border */
+  --border-light:   #283852;       /* Spirit-touched border */
+  --border-active:  #3b82f6;       /* Spirit blue active */
   --border-subtle:  rgba(255, 255, 255, 0.06);
 
-  --fg:             #e6edf3;       /* Primary crisp white text */
-  --fg-heading:     #ffffff;       /* Heading white */
-  --muted:          #8b949e;       /* Secondary muted text */
-  --muted-light:    #c9d1d9;       /* Light body text */
-  --muted-dark:     #6e7681;       /* Tertiary captions */
+  --fg:             #e2e8f0;       /* Moonlit white text */
+  --fg-heading:     #f8fafc;       /* Heading soft white */
+  --muted:          #94a3b8;       /* Spirit grey text */
+  --muted-light:    #cbd5e1;       /* Twilight body text */
+  --muted-dark:     #64748b;       /* Distant caption */
 
-  /* Accents */
-  --accent:         #58a6ff;       /* GitHub Electric Blue */
-  --accent-hover:   #79b8ff;
-  --accent-glow:    rgba(88, 166, 255, 0.18);
-  --accent-dim:     rgba(88, 166, 255, 0.45);
+  /* Accents — Ghibli Spirit Teal & Kodama Green */
+  --accent:         #2dd4bf;       /* Ethereal Spirit Teal (Haku dragon / Spirit stream) */
+  --accent-hover:   #5eead4;       /* Luminous aqua hover */
+  --accent-glow:    rgba(45, 212, 191, 0.18);
+  --accent-dim:     rgba(45, 212, 191, 0.45);
 
-  --accent-emerald: #3fb950;       /* GitHub contribution green */
-  --accent-purple:  #bc8cff;       /* GitHub purple */
-  --accent-amber:   #d29922;       /* GitHub amber */
+  --accent-emerald: #34d399;       /* Kodama / forest spirit green */
+  --accent-purple:  #a78bfa;       /* Ghibli moonlit lavender */
+  --accent-amber:   #fbbf24;       /* Warm lantern amber */
 
   /* Status Badges */
-  --status-live-bg:     rgba(63, 185, 80, 0.12);
-  --status-live-border: rgba(63, 185, 80, 0.35);
-  --status-live-fg:     #3fb950;
+  --status-live-bg:     rgba(45, 212, 191, 0.12);
+  --status-live-border: rgba(45, 212, 191, 0.35);
+  --status-live-fg:     #2dd4bf;
 
-  --status-wip-bg:      rgba(210, 153, 34, 0.12);
-  --status-wip-border:  rgba(210, 153, 34, 0.35);
-  --status-wip-fg:      #d29922;
+  --status-wip-bg:      rgba(251, 191, 36, 0.12);
+  --status-wip-border:  rgba(251, 191, 36, 0.35);
+  --status-wip-fg:      #fbbf24;
 
-  --status-beta-bg:     rgba(188, 140, 255, 0.12);
-  --status-beta-border: rgba(188, 140, 255, 0.35);
-  --status-beta-fg:     #bc8cff;
+  --status-beta-bg:     rgba(167, 139, 250, 0.12);
+  --status-beta-border: rgba(167, 139, 250, 0.35);
+  --status-beta-fg:     #a78bfa;
 
   /* Typography Stack */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -121,7 +121,7 @@ svg {
 }
 
 ::selection {
-  background-color: rgba(88, 166, 255, 0.3);
+  background-color: rgba(245, 158, 11, 0.25);
   color: #fff;
 }
 
@@ -184,7 +184,7 @@ h1, h2, h3, h4 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(8, 9, 10, 0.85);
+  background: rgba(10, 14, 26, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -320,12 +320,12 @@ h1, h2, h3, h4 {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(8, 9, 10, 0) 0%,
-    rgba(8, 9, 10, 0.02) 25%,
-    rgba(8, 9, 10, 0.25) 55%,
-    rgba(8, 9, 10, 0.65) 78%,
-    rgba(8, 9, 10, 0.92) 92%,
-    rgba(8, 9, 10, 1) 100%
+    rgba(9, 13, 22, 0) 0%,
+    rgba(9, 13, 22, 0.02) 25%,
+    rgba(9, 13, 22, 0.25) 55%,
+    rgba(9, 13, 22, 0.65) 78%,
+    rgba(9, 13, 22, 0.92) 92%,
+    rgba(9, 13, 22, 1) 100%
   );
   pointer-events: none;
   z-index: 2;
@@ -333,139 +333,88 @@ h1, h2, h3, h4 {
 
 
 /* ============================================================
-   AMBIENT SHOOTING STARS / COMETS
+   AMBIENT SPIRIT FIREFLIES — Ghibli Atmosphere
    ============================================================ */
 .shooting-star {
   position: absolute;
-  height: 2px;
-  border-radius: 100px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
   z-index: 3;
-  opacity: 0;
-  will-change: transform, opacity;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
-.shooting-star::before {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.shooting-star::before,
+.shooting-star::after {
+  content: none;
+}
+
+/* Spirit teal firefly 1 */
+.star-1 {
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.9) 0%, rgba(45, 212, 191, 0) 70%);
+  box-shadow: 0 0 8px 3px rgba(45, 212, 191, 0.4), 0 0 16px 6px rgba(45, 212, 191, 0.15);
   width: 5px;
   height: 5px;
-  border-radius: 50%;
-  background: #fff;
+  top: 30%;
+  left: 20%;
+  animation: floatFirefly1 8s ease-in-out infinite, fireflyGlow 3s ease-in-out infinite;
 }
 
-.shooting-star::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  opacity: 0.6;
-}
-
-/* Cyan comet 1 */
-.star-1 {
-  width: 170px;
-  background: linear-gradient(90deg, transparent 0%, rgba(88, 166, 255, 0.15) 20%, rgba(88, 166, 255, 0.6) 70%, #fff 100%);
-  box-shadow: 0 0 10px 2px rgba(88, 166, 255, 0.5), 0 0 25px 4px rgba(88, 166, 255, 0.15);
-  top: 35%;
-  left: -25%;
-  animation: shootComet1 5s infinite ease-in 0.3s;
-}
-.star-1::before {
-  box-shadow: 0 0 8px 3px rgba(88, 166, 255, 0.8);
-}
-.star-1::after {
-  background: rgba(88, 166, 255, 0.8);
-  box-shadow: 25px 1px 0 rgba(88, 166, 255, 0.3);
-}
-
-/* Emerald green comet 2 */
+/* Kodama green spirit firefly 2 */
 .star-2 {
-  width: 120px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(63, 185, 80, 0.15) 30%, rgba(63, 185, 80, 0.5) 75%, #fff 100%);
-  box-shadow: 0 0 8px 1px rgba(63, 185, 80, 0.4);
-  top: 65%;
-  left: 5%;
-  animation: shootComet2 6s infinite ease-in 2s;
-}
-.star-2::before {
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.85) 0%, rgba(52, 211, 153, 0) 70%);
+  box-shadow: 0 0 6px 2px rgba(52, 211, 153, 0.35), 0 0 12px 4px rgba(52, 211, 153, 0.1);
   width: 4px;
   height: 4px;
-  box-shadow: 0 0 6px 3px rgba(63, 185, 80, 0.7);
-}
-.star-2::after {
-  background: rgba(63, 185, 80, 0.7);
+  top: 55%;
+  left: 65%;
+  animation: floatFirefly2 10s ease-in-out infinite 2s, fireflyGlow 4s ease-in-out infinite 1s;
 }
 
-/* Purple micro-comet 3 */
+/* Lavender spirit firefly 3 */
 .star-3 {
-  width: 90px;
-  height: 1.5px;
-  background: linear-gradient(90deg, transparent 0%, rgba(188, 140, 255, 0.15) 30%, rgba(188, 140, 255, 0.5) 80%, #fff 100%);
-  box-shadow: 0 0 8px 1px rgba(188, 140, 255, 0.4);
-  top: 22%;
-  left: 45%;
-  animation: shootComet3 7.5s infinite ease-in 4s;
-}
-.star-3::before {
-  width: 4px;
-  height: 4px;
-  box-shadow: 0 0 6px 3px rgba(188, 140, 255, 0.7);
-}
-.star-3::after {
-  background: rgba(188, 140, 255, 0.6);
-}
-
-/* White micro comet 4 */
-.star-4 {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 10%, rgba(255, 255, 255, 0.3) 60%, #fff 100%);
-  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.3);
-  top: 80%;
-  left: -15%;
-  animation: shootComet1 4.2s infinite ease-in 5.5s;
-}
-.star-4::before {
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.8) 0%, rgba(167, 139, 250, 0) 70%);
+  box-shadow: 0 0 5px 2px rgba(167, 139, 250, 0.3), 0 0 10px 3px rgba(167, 139, 250, 0.1);
   width: 3px;
   height: 3px;
-  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.6);
-}
-.star-4::after { display: none; }
-
-@keyframes shootComet1 {
-  0%   { transform: translateX(0) translateY(0) rotate(-35deg); opacity: 0; }
-  2%   { opacity: 0.5; }
-  6%   { opacity: 1; }
-  18%  { transform: translateX(850px) translateY(-595px) rotate(-35deg); opacity: 0.3; }
-  22%  { transform: translateX(1150px) translateY(-805px) rotate(-35deg); opacity: 0; }
-  100% { transform: translateX(1150px) translateY(-805px) rotate(-35deg); opacity: 0; }
+  top: 20%;
+  left: 75%;
+  animation: floatFirefly3 12s ease-in-out infinite 4s, fireflyGlow 5s ease-in-out infinite 2s;
 }
 
-@keyframes shootComet2 {
-  0%   { transform: translateX(0) translateY(0) rotate(-40deg); opacity: 0; }
-  3%   { opacity: 0.5; }
-  7%   { opacity: 1; }
-  16%  { transform: translateX(700px) translateY(-588px) rotate(-40deg); opacity: 0.4; }
-  21%  { transform: translateX(950px) translateY(-798px) rotate(-40deg); opacity: 0; }
-  100% { transform: translateX(950px) translateY(-798px) rotate(-40deg); opacity: 0; }
+/* Hidden — only 3 fireflies for cleanliness */
+.star-4 {
+  display: none;
 }
 
-@keyframes shootComet3 {
-  0%   { transform: translateX(0) translateY(0) rotate(-30deg); opacity: 0; }
-  4%   { opacity: 0.6; }
-  8%   { opacity: 1; }
-  20%  { transform: translateX(600px) translateY(-346px) rotate(-30deg); opacity: 0.2; }
-  25%  { transform: translateX(800px) translateY(-462px) rotate(-30deg); opacity: 0; }
-  100% { transform: translateX(800px) translateY(-462px) rotate(-30deg); opacity: 0; }
+@keyframes floatFirefly1 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(30px, -20px); }
+  50%  { transform: translate(-15px, -35px); }
+  75%  { transform: translate(20px, -10px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes floatFirefly2 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-25px, 15px); }
+  50%  { transform: translate(20px, -25px); }
+  75%  { transform: translate(-10px, 20px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes floatFirefly3 {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(15px, 25px); }
+  50%  { transform: translate(-20px, -15px); }
+  75%  { transform: translate(25px, -20px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes fireflyGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.85; }
 }
 
 
@@ -651,7 +600,7 @@ h1, h2, h3, h4 {
   background-color: #ffffff;
   border-color: #ffffff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
 }
 
 .btn-outline {
@@ -788,8 +737,8 @@ h1, h2, h3, h4 {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--accent);
-  background: rgba(88, 166, 255, 0.08);
-  border: 1px solid rgba(88, 166, 255, 0.2);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.2);
   padding: 0.1rem 0.45rem;
   border-radius: var(--radius-xs);
 }
